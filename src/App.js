@@ -7,6 +7,7 @@ import GlobalStyle from "./GlobalStyle";
 import Register from "./pages/Register";
 import FindPw from "./components/FindPw";
 import Header from "./components/Header";
+import EditInfo from "./components/EditInfo";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/Mypage" element={<MyPage />}></Route>
         <Route path="/Register" element={<Register />}></Route>
         <Route path="/FindPw" element={<FindPw />}></Route>
+        <Route path="/EditInfo" element={<EditInfo />}></Route>
         <Route path="/Board" element={<Board />}></Route>
         <Route path="/" element={<Home />}></Route>
       </Routes>
