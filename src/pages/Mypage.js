@@ -1,7 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import user from "../assets/user.png";
 
 function MyPage() {
+  const navigate = useNavigate();
+  const onClick = () => {
+    navigate("/EditInfo");
+  };
   return (
     <Container>
       <MyPageBox>
@@ -14,7 +19,7 @@ function MyPage() {
             <p>thyeonee@gmail.com</p>
           </div>
           <div className="button">
-            <EditProfile>내 정보 수정</EditProfile>
+            <EditProfile onClick={onClick}>내 정보 수정</EditProfile>
             <Withdrawl>회원 탈퇴</Withdrawl>
           </div>
         </ProfileBox>
