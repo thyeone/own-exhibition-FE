@@ -11,19 +11,21 @@ import EditInfo from "./components/EditInfo";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Header />
-      <GlobalStyle />
-      <Routes>
-        <Route path="/Login" element={<Login />}></Route>
-        <Route path="/Mypage" element={<MyPage />}></Route>
-        <Route path="/Register" element={<Register />}></Route>
-        <Route path="/FindPw" element={<FindPw />}></Route>
-        <Route path="/EditInfo" element={<EditInfo />}></Route>
-        <Route path="/Board" element={<Board />}></Route>
-        <Route path="/" element={<Home />}></Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <GlobalStyle />
+        <Header />
+        <Routes>
+          <Route path="/login" element={<Login />}></Route>
+          <Route path="/mypage" element={<MyPage />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/findPw" element={<FindPw />}></Route>
+          <Route path="/mypage/editinfo" element={<EditInfo />}></Route>
+          <Route path="/board" element={<Board />}></Route>
+          <Route path="/" element={<Home />}></Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 

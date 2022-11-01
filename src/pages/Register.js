@@ -120,16 +120,19 @@ function Register() {
             onChange={onEmailHandler}
           ></Input>
           <Input
+            autoComplete="on"
             type="password"
             name="pw"
             placeholder="비밀번호 입력"
             value={pw}
             onChange={onPasswordHandler}
+            minLength="8"
           ></Input>
           <Input
+            autoComplete="on"
             type="password"
             name="pw"
-            placeholder="비밀번호 입력(8자리 이상)"
+            placeholder="비밀번호 확인(8자리 이상)"
             value={pwcheck}
             onChange={onPasswordCheckHandler}
             minLength="8"

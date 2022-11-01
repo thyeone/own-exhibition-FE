@@ -5,7 +5,7 @@ import user from "../assets/user.png";
 function MyPage() {
   const navigate = useNavigate();
   const onClick = () => {
-    navigate("/EditInfo");
+    navigate("/mypage/editinfo");
   };
   return (
     <Container>
