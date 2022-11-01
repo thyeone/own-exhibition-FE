@@ -1,13 +1,14 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
+import logo2 from "../assets/logo2.png";
 
 function Header() {
   return (
     <StyledHeader>
       <Link to="/">
         <StyledLogo>
-          <img src={logo} alt="logo"></img>
+          <img src={logo2} alt="logo"></img>
           <h3>너만의 전시회</h3>
         </StyledLogo>
       </Link>
@@ -30,20 +31,21 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   width: 100%;
   margin-bottom: 32px;
-  padding-bottom: 32px;
+  padding-bottom: 22px;
   background-color: white;
 `;
 
 const StyledLogo = styled.div`
   display: flex;
   margin-left: 50px;
-  padding-top: 20px;
+  /* padding-top: 20px; */
   img {
-    width: 50px;
-    height: 50px;
+    width: 102px;
+    height: 102px;
   }
   h3 {
     display: flex;
+    margin-left: 12px;
     align-items: center;
     font-size: 24px;
     font-weight: 600;
