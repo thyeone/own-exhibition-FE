@@ -1,11 +1,15 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import logo from "../assets/logo.png";
 
 function Header() {
   return (
     <StyledHeader>
       <Link to="/">
-        <StyledLogo>로고</StyledLogo>
+        <StyledLogo>
+          <img src={logo} alt="logo"></img>
+          <h3>너만의 전시회</h3>
+        </StyledLogo>
       </Link>
       <HeaderRight>
         <Link to="/Login">
@@ -25,20 +29,33 @@ const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin: 34px 0 33px;
-  padding-bottom: 30px;
+  margin-bottom: 32px;
+  padding-bottom: 32px;
   background-color: white;
-  border-bottom: 1px solid #dbdee2;
 `;
 
 const StyledLogo = styled.div`
-  margin-left: 50px;
   display: flex;
+  margin-left: 50px;
+  padding-top: 20px;
+  img {
+    width: 50px;
+    height: 50px;
+  }
+  h3 {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: 600;
+    text-align: center;
+  }
 `;
 
 const HeaderRight = styled.div`
   display: flex;
+  align-items: center;
   margin-right: 30px;
+  padding-top: 20px;
   p {
     margin-left: 10px;
     font-size: 14px;
