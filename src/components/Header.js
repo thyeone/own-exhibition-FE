@@ -1,12 +1,14 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
+import logo2 from "../assets/logo2.png";
+
 function Header() {
   return (
     <StyledHeader>
       <Link to="/">
         <StyledLogo>
-          <img src={logo} alt="logo"></img>
+          <img src={logo2} alt="logo"></img>
           <h3>너만의 전시회</h3>
         </StyledLogo>
       </Link>
@@ -38,8 +40,8 @@ const StyledLogo = styled.div`
   margin-left: 50px;
   /* padding-top: 20px; */
   img {
-    width: 100px;
-    height: 100px;
+    width: 102px;
+    height: 102px;
   }
   h3 {
     display: flex;
