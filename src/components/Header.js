@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../assets/logo.png";
-
 function Header() {
   return (
     <StyledHeader>
@@ -30,20 +29,21 @@ const StyledHeader = styled.header`
   justify-content: space-between;
   width: 100%;
   margin-bottom: 32px;
-  padding-bottom: 32px;
+  padding-bottom: 22px;
   background-color: white;
 `;
 
 const StyledLogo = styled.div`
   display: flex;
   margin-left: 50px;
-  padding-top: 20px;
+  /* padding-top: 20px; */
   img {
-    width: 50px;
-    height: 50px;
+    width: 100px;
+    height: 100px;
   }
   h3 {
     display: flex;
+    margin-left: 12px;
     align-items: center;
     font-size: 24px;
     font-weight: 600;
