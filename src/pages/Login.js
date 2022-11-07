@@ -3,6 +3,79 @@ import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 
+function Login() {
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState([]);
+  const [email, setEmail] = useState("");
+  const [pw, setPw] = useState("");
+
+  const navigate = useNavigate();
+
+  const onEmailHandler = (event) => {
+    setEmail(event.currentTarget.value);
+  };
+
+  const onPasswordHandler = (event) => {
+    setPw(event.currentTarget.value);
+  };
+
+  const onSubmit = (event) => {
+    event.preventDefault();
+    axios
+      .post("http://13.125.82.62/api/login/", {
+        email: email,
+        password: pw,
+      })
+      .then((res) => {
+        console.log(res);
+        // localStorage.clear();
+        localStorage.setItem("id", res.data.id);
+        localStorage.setItem("token", res.data.token);
+        navigate("/main");
+      })
+      .catch((error) => {
+        alert("로그인 실패");
+        console.log("로그인 실패", error);
+      });
+  };
+  useEffect(() => {
+    if (localStorage.getItem("token") !== null) {
+      navigate("/main");
+    }
+  }, []);
+  return (
+    <Container>
+      <LoginBox>
+        <Title>로그인</Title>
+        <Login_Form onSubmit={onSubmit}>
+          <Input
+            type="email"
+            name="email"
+            placeholder="이메일"
+            value={email}
+            onChange={onEmailHandler}
+          ></Input>
+          <Input
+            autoComplete="on"
+            type="password"
+            name="pw"
+            placeholder="비밀번호"
+            value={pw}
+            onChange={onPasswordHandler}
+          ></Input>
+          <LoginBtn>로그인</LoginBtn>
+        </Login_Form>
+        <Link to="/Register">
+          <SignupBtn>회원가입</SignupBtn>
+        </Link>
+        <Link to="/FindPw">
+          <FindPw>비밀번호 찾기</FindPw>
+        </Link>
+      </LoginBox>
+    </Container>
+  );
+}
+
 const Container = styled.div``;
 
 const LoginBox = styled.div`
@@ -69,82 +142,4 @@ const FindPw = styled.span`
   color: #58a6ff;
   padding: 10px;
 `;
-
-function Login() {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
-  const [email, setEmail] = useState("");
-  const [pw, setPw] = useState("");
-
-  const navigate = useNavigate();
-
-  const onEmailHandler = (event) => {
-    setEmail(event.currentTarget.value);
-  };
-
-  const onPasswordHandler = (event) => {
-    setPw(event.currentTarget.value);
-  };
-
-  const onSubmit = (event) => {
-    event.preventDefault();
-    axios
-      .post("http://13.125.82.62/api/users")
-      .then((response) => response.json())
-      .then((res) => email === res.email && pw === res.password)
-      ? navigate("/")
-      : alert("아이디와 비밀번호를 다시 확인해주세요.");
-  };
-
-  const getData = async () => {
-    const json = await axios("http://13.125.82.62/api/users");
-    setData(json.data.users);
-    setLoading(false);
-  };
-
-  useEffect(() => {
-    getData();
-  }, []);
-
-  return (
-    <div>
-      {loading ? (
-        <div>
-          <span>Loading... </span>
-        </div>
-      ) : (
-        <Container>
-          <LoginBox>
-            <Title>로그인</Title>
-            <Login_Form onSubmit={onSubmit} method="POST">
-              <Input
-                type="email"
-                name="email"
-                placeholder="이메일"
-                value={email}
-                onChange={onEmailHandler}
-              ></Input>
-              <Input
-                autoComplete="on"
-                type="password"
-                name="pw"
-                placeholder="비밀번호"
-                value={pw}
-                onChange={onPasswordHandler}
-              ></Input>
-              <LoginBtn type="submit">로그인</LoginBtn>
-            </Login_Form>
-            <Link to="/Register">
-              <SignupBtn>회원가입</SignupBtn>
-            </Link>
-            <Link to="/FindPw">
-              <FindPw>비밀번호 찾기</FindPw>
-            </Link>
-          </LoginBox>
-        </Container>
-      )}
-    </div>
-  );
-}
-
 export default Login;
