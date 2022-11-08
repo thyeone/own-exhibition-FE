@@ -106,21 +106,24 @@ const EditProfile = styled.button`
   border-radius: 5px;
   width: 33%;
   height: 40px;
-  background-color: #191919;
+  background-color: #58a6ff;
   border: none;
   color: white;
   font-size: 14px;
+  cursor: pointer;
 `;
 
 const Withdrawl = styled.button`
   border-radius: 5px;
   width: 33%;
   height: 40px;
-  background-color: #191919;
+  background-color: #58a6ff;
+
   border: none;
   color: white;
   font-size: 14px;
   margin-left: 10px;
+  cursor: pointer;
 `;
 
 const WishlistBox = styled.div`
