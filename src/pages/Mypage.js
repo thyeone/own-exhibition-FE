@@ -1,12 +1,29 @@
+import axios from "axios";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import user from "../assets/user.png";
 
 function MyPage() {
+  const [data, setData] = useState([]);
+  const accessToken = localStorage.getItem("token");
   const navigate = useNavigate();
   const onClick = () => {
     navigate("/mypage/editinfo");
   };
+  const getData = async () => {
+    const json = await axios.get(`http://13.125.82.62/api/userinfo/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    setData(json.data.user);
+    console.log(json);
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
   return (
     <Container>
       <MyPageBox>
@@ -15,7 +32,7 @@ function MyPage() {
             <img src={user}></img>
           </div>
           <div className="info">
-            <h3>김태현</h3>
+            <h3>{data.name}</h3>
             <p>thyeonee@gmail.com</p>
           </div>
           <div className="button">
