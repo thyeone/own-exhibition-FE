@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
@@ -28,7 +29,12 @@ const Title = styled.h1`
   margin-bottom: 20px;
 `;
 
-const Form = styled.form``;
+const Form = styled.form`
+  span {
+    font-size: 12px;
+    padding-bottom: 30px;
+  }
+`;
 
 const Input = styled.input`
   font-size: 14px;
@@ -47,6 +53,7 @@ const Btn = styled.button`
   font-size: 14px;
   color: #fff;
   padding: 10px;
+  margin-top: 10px;
   border-radius: 5px;
   background-color: #609ff1;
   border: none;
@@ -56,102 +63,105 @@ const Btn = styled.button`
 function Register() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [pw, setPw] = useState("");
-  const [pwcheck, setPwCheck] = useState("");
-  const [birthdate, setBirthDate] = useState("");
-  const [phonenum, setPhoneNum] = useState("");
-
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm();
   const navigate = useNavigate();
 
-  const onNameHandler = (event) => {
-    setName(event.currentTarget.value);
-  };
-
-  const onEmailHandler = (event) => {
-    setEmail(event.currentTarget.value);
-  };
-
-  const onPasswordHandler = (event) => {
-    setPw(event.currentTarget.value);
-  };
-
-  const onPasswordCheckHandler = (event) => {
-    setPwCheck(event.currentTarget.value);
-  };
-
-  const onBirthDateHandler = (event) => {
-    setBirthDate(event.currentTarget.value);
-  };
-
-  const onPhoneNum = (event) => {
-    setPhoneNum(event.currentTarget.value);
-  };
-
-  const onSubmit = (event) => {
-    event.preventDefault();
+  const onSubmit = (data) => {
+    if (data.password !== data.pwCheck) {
+      setError(
+        "pwCheck",
+        {
+          message: "패스워드가 일치하지 않습니다.",
+        },
+        { shouldFocus: true }
+      );
+    }
     axios
-      .post("http://13.125.82.62/api/users")
-      .then((response) => setPw === setPwCheck)
-      ? navigate("/Login")
-      : alert("비밀번호를 확인해주세요.");
+      .post("http://13.125.82.62/api/register")
+      .then((response) => {
+        console.log(response);
+        navigate("/login");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   };
-
-  useEffect(() => {});
-
+  console.log(errors);
   return (
     <Container>
       <RegisterBox>
         <Title>회원가입</Title>
-        <Form onSubmit={onSubmit}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Input
+            {...register("name", { required: "항목을 입력해주세요" })}
             type="text"
             name="name"
             placeholder="이름 입력"
-            value={name}
-            onChange={onNameHandler}
-          ></Input>
+          />
+          <span>{errors?.name?.message}</span>
           <Input
+            {...register("email", { required: "항목을 입력해주세요" })}
             type="email"
             name="email"
             placeholder="이메일 입력"
-            value={email}
-            onChange={onEmailHandler}
-          ></Input>
+          />
+          <span>{errors?.email?.message}</span>
           <Input
+            {...register("password", {
+              required: "항목을 입력해주세요",
+            })}
             autoComplete="on"
             type="password"
-            name="pw"
             placeholder="비밀번호 입력"
-            value={pw}
-            onChange={onPasswordHandler}
-            minLength="8"
-          ></Input>
+            minLength="6"
+          />
           <Input
+            {...register("pwCheck", {
+              required: "항목을 입력해주세요",
+              pattern: {
+                value: /^[A-Za-z0-9]{6,12}$/,
+                message: "6자리에서 12자리까지의 문자와 숫자를 사용해주세요.",
+              },
+              minLength: {
+                value: 6,
+                message: "6자리 이상의 비밀번호를 입력해주세요.",
+              },
+            })}
             autoComplete="on"
             type="password"
-            name="pw"
-            placeholder="비밀번호 확인(8자리 이상)"
-            value={pwcheck}
-            onChange={onPasswordCheckHandler}
-            minLength="8"
-          ></Input>
+            placeholder="비밀번호 확인"
+          />
+          <span>{errors?.pwCheck?.message}</span>
           <Input
+            {...register("birthday", {
+              required: "항목을 입력해주세요",
+              pattern: {
+                value:
+                  /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/,
+                message: "올바른 날짜가 아닙니다.",
+              },
+            })}
             type="text"
-            name="bdate"
-            placeholder="생년월일 입력 ex)1989.01.01"
-            value={birthdate}
-            onChange={onBirthDateHandler}
-            minLength="8"
-          ></Input>
+            placeholder="생년월일 입력 ex)19890101"
+          />
+          <span>{errors?.birthday?.message}</span>
           <Input
+            {...register("phoneNum", {
+              required: "항목을 입력해주세요",
+              pattern: {
+                value: /^\d{3}-\d{3,4}-\d{4}$/,
+                message: "숫자, -을 포함해 휴대전화 형식에 맞게 입력해주세요.",
+              },
+            })}
             type="text"
-            name="phonenum"
             placeholder="전화번호 입력 ex)010-1234-1234"
-            value={phonenum}
-            onChange={onPhoneNum}
-          ></Input>
+          />
+          <span>{errors?.phoneNum?.message}</span>
           <Btn type="submit">가입하기</Btn>
         </Form>
       </RegisterBox>

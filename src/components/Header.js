@@ -1,10 +1,12 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../assets/logo.png";
 import logo2 from "../assets/logo2.png";
+import Logout from "./shared/Logout";
 
 function Header() {
-  return (
+  const path = window.location.pathname;
+  const navigate = useNavigate();
+  return path !== "/" ? (
     <StyledHeader>
       <Link to="/">
         <StyledLogo>
@@ -13,19 +15,15 @@ function Header() {
         </StyledLogo>
       </Link>
       <HeaderRight>
-        <Link to="/Login">
-          <p>로그인</p>
-        </Link>
-        <Link to="/Register">
-          <p>회원가입</p>
-        </Link>
+        <button onClick={Logout}>로그아웃</button>
         <Link to="/Mypage">
           <p>마이페이지</p>
         </Link>
       </HeaderRight>
     </StyledHeader>
-  );
+  ) : null;
 }
+
 const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
