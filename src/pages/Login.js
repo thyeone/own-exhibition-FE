@@ -27,8 +27,7 @@ function Login() {
         password: pw,
       })
       .then((res) => {
-        console.log(res);
-        // localStorage.clear();
+        // console.log(res);
         localStorage.setItem("id", res.data.id);
         localStorage.setItem("token", res.data.token);
         navigate("/main");
