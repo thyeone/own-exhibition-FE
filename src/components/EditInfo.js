@@ -7,6 +7,7 @@ import user from "../assets/user.png";
 
 function EditInfo() {
   const [data, setData] = useState([]);
+  const accessToken = localStorage.getItem("token");
   const {
     register,
     handleSubmit,
@@ -30,14 +31,19 @@ function EditInfo() {
     navigate("/mypage");
   };
 
-  // const getData = async () => {
-  //   const json = await axios(`http://13.125.82.62/api/users/${id}`);
-  //   setData(json.data);
-  // };
+  const getData = async () => {
+    const json = await axios(`http://13.125.82.62/api/userinfo/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    setData(json.data.user);
+    console.log(json);
+  };
 
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    getData();
+  }, []);
 
   return (
     <Container>
@@ -47,8 +53,8 @@ function EditInfo() {
             <img src={user}></img>
           </div>
           <div className="info">
-            <h3>이름</h3>
-            <p>thyeonee@gmail.com</p>
+            <h3>{data.name}</h3>
+            <p>{data.email}</p>
           </div>
           <form onSubmit={handleSubmit(onSubmit)}>
             <p>비밀번호</p>
