@@ -1,7 +1,6 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div``;
@@ -61,8 +60,6 @@ const Btn = styled.button`
 `;
 
 function Register() {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
   const {
     register,
     handleSubmit,
@@ -81,8 +78,12 @@ function Register() {
         { shouldFocus: true }
       );
     }
+
     axios
-      .post("http://13.125.82.62/api/register")
+      .post("http://13.125.82.62/api/register", {
+        email: data.email,
+        password: data.password,
+      })
       .then((response) => {
         console.log(response);
         navigate("/login");
@@ -91,7 +92,7 @@ function Register() {
         console.log(err);
       });
   };
-  console.log(errors);
+
   return (
     <Container>
       <RegisterBox>
@@ -162,7 +163,7 @@ function Register() {
             placeholder="전화번호 입력 ex)010-1234-1234"
           />
           <span>{errors?.phoneNum?.message}</span>
-          <Btn type="submit">가입하기</Btn>
+          <Btn>가입하기</Btn>
         </Form>
       </RegisterBox>
     </Container>
