@@ -1,30 +1,19 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useForm } from "react-hook-form";
 
 function Login() {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
-  const [email, setEmail] = useState("");
-  const [pw, setPw] = useState("");
+  const { register, handleSubmit } = useForm();
 
   const navigate = useNavigate();
 
-  const onEmailHandler = (event) => {
-    setEmail(event.currentTarget.value);
-  };
-
-  const onPasswordHandler = (event) => {
-    setPw(event.currentTarget.value);
-  };
-
-  const onSubmit = (event) => {
-    event.preventDefault();
+  const onSubmit = (data) => {
     axios
       .post("http://13.125.82.62/api/login/", {
-        email: email,
-        password: pw,
+        email: data.email,
+        password: data.password,
       })
       .then((res) => {
         // console.log(res);
@@ -46,24 +35,24 @@ function Login() {
     <Container>
       <LoginBox>
         <Title>로그인</Title>
-        <Login_Form onSubmit={onSubmit}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Input
+            {...register("email")}
             type="email"
             name="email"
-            placeholder="이메일"
-            value={email}
-            onChange={onEmailHandler}
-          ></Input>
+            placeholder="이메일 입력"
+          />
           <Input
+            {...register("password", {
+              required: "항목을 입력해주세요",
+            })}
             autoComplete="on"
             type="password"
-            name="pw"
-            placeholder="비밀번호"
-            value={pw}
-            onChange={onPasswordHandler}
-          ></Input>
+            placeholder="비밀번호 입력"
+            minLength="6"
+          />
           <LoginBtn>로그인</LoginBtn>
-        </Login_Form>
+        </Form>
         <Link to="/Register">
           <SignupBtn>회원가입</SignupBtn>
         </Link>
@@ -100,7 +89,7 @@ const Title = styled.h1`
   margin-bottom: 15px;
 `;
 
-const Login_Form = styled.form``;
+const Form = styled.form``;
 
 const Input = styled.input`
   font-size: 14px;
