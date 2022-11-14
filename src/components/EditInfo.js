@@ -43,6 +43,9 @@ function EditInfo() {
 
   useEffect(() => {
     getData();
+    if (localStorage.getItem("token") == null) {
+      navigate("/");
+    }
   }, []);
 
   return (
