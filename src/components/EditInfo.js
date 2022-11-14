@@ -43,7 +43,6 @@ function EditInfo() {
     <Container>
       <MyPageBox>
         <ProfileBox>
-        <Profile>
           <div className="profile">
             <img src={user}></img>
           </div>
@@ -51,36 +50,29 @@ function EditInfo() {
             <h3>이름</h3>
             <p>thyeonee@gmail.com</p>
           </div>
-          </Profile>
           <form onSubmit={handleSubmit(onSubmit)}>
-         <textbox>
             <p>비밀번호</p>
             <input
               {...register("password", { required: "항목을 입력해주세요" })}
               defaultValue="*******"
-            /></textbox>
-         
-         <textbox>
+            />
             <span>{errors?.password?.message}</span>
             <p>비밀번호 확인</p>
 
             <input
               {...register("password1", { required: "항목을 입력해주세요" })}
               defaultValue="*******"
-            /></textbox>
-
-            <textbox>
+            />
             <span>{errors?.password1?.message}</span>
             <p>생년월일</p>
             <input
               {...register("birthday", { required: "항목을 입력해주세요" })}
-            /></textbox>
-                <textboxs>
+            />
             <span>{errors?.birthday?.message}</span>
             <p>전화번호</p>
             <input
               {...register("phoneNum", { required: "항목을 입력해주세요" })}
-            /></textboxs>
+            />
             <span>{errors?.phoneNum?.message}</span>
             <div>
               <button onClick={onCancle}>취소</button>
@@ -100,21 +92,20 @@ const MyPageBox = styled.div`
   justify-content: center;
   align-items: center;
 `;
-const Profile = styled.div`
-background-color: #8DBEB6;
-`;
 const ProfileBox = styled.div`
   background-color: #303136;
   border-radius: 10px;
   width: 450px;
-  height: 680px;
+  height: 600px;
   margin-left: 20px;
+
   img {
     display: flex;
     width: 88px;
     height: 88px;
     cursor: pointer;
   }
+
   h3 {
     color: white;
     font-size: 20px;
@@ -124,22 +115,21 @@ const ProfileBox = styled.div`
   p {
     color: white;
     margin: 13px;
-    font-weight:bold;
-    text-align:center;
   }
+
   .profile {
     display: flex;
     justify-content: center;
     padding: 50px 0 30px 0;
- 
-
   }
+
   .info {
     display: flex;
     flex-direction: column;
     text-align: center;
     gap: 12px;
   }
+
   button {
     display: flex;
     justify-content: center;
@@ -161,46 +151,20 @@ const ProfileBox = styled.div`
     justify-content: center;
     flex-direction: column;
     align-items: center;
-
-
+    margin-top: 10px;
   }
-
   input {
     border: none;
     padding-bottom: 8px;
+
     border-radius: 5px;
     width: 250px;
     text-align: center;
-    border-bottom:solid;
-    border-top:solid;
-    border-right:solid;
-    border-left:solid;
-    margin-left:100px;
-   
-
   }
   button:hover {
     background-color: gray;
     color: white;
   }
-  textbox {
-    
-    padding-bottom: 10px;
-    margin:2px;
-    width:100%;
-    border-top:2px solid #545454;
-
-  }
-  textboxs {
-    
-    padding-bottom: 10px;
-    margin:2px;
-    width:100%;
-    border-top:2px solid #545454;
-    border-bottom:2px solid #545454;
-  }
-
 `;
-
 
 export default EditInfo;
