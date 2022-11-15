@@ -7,6 +7,7 @@ import user from "../assets/user.png";
 
 function EditInfo() {
   const [data, setData] = useState([]);
+  const accessToken = localStorage.getItem("token");
   const {
     register,
     handleSubmit,
@@ -30,57 +31,69 @@ function EditInfo() {
     navigate("/mypage");
   };
 
-  // const getData = async () => {
-  //   const json = await axios(`http://13.125.82.62/api/users/${id}`);
-  //   setData(json.data);
-  // };
+  const getData = async () => {
+    const json = await axios(`http://13.125.82.62/api/userinfo/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    setData(json.data.user);
+    console.log(json);
+  };
 
-  // useEffect(() => {
-  //   getData();
-  // }, []);
+  useEffect(() => {
+    getData();
+    if (localStorage.getItem("token") == null) {
+      navigate("/");
+    }
+  }, []);
 
   return (
     <Container>
       <MyPageBox>
         <ProfileBox>
-        <Profile>
-          <div className="profile">
-            <img src={user}></img>
-          </div>
-          <div className="info">
-            <h3>이름</h3>
-            <p>thyeonee@gmail.com</p>
-          </div>
+          <Profile>
+            <div className="profile">
+              <img src={user}></img>
+            </div>
+            <div className="info">
+              <h3>{data.name}</h3>
+              <p>{data.email}</p>
+            </div>
           </Profile>
           <form onSubmit={handleSubmit(onSubmit)}>
-         <textbox>
-            <p>비밀번호</p>
-            <input
-              {...register("password", { required: "항목을 입력해주세요" })}
-              defaultValue="*******"
-            /></textbox>
-         
-         <textbox>
-            <span>{errors?.password?.message}</span>
-            <p>비밀번호 확인</p>
-
-            <input
-              {...register("password1", { required: "항목을 입력해주세요" })}
-              defaultValue="*******"
-            /></textbox>
+            <textbox>
+              <p>비밀번호</p>
+              <input
+                {...register("password", { required: "항목을 입력해주세요" })}
+                defaultValue="*******"
+              />
+            </textbox>
 
             <textbox>
-            <span>{errors?.password1?.message}</span>
-            <p>생년월일</p>
-            <input
-              {...register("birthday", { required: "항목을 입력해주세요" })}
-            /></textbox>
-                <textboxs>
-            <span>{errors?.birthday?.message}</span>
-            <p>전화번호</p>
-            <input
-              {...register("phoneNum", { required: "항목을 입력해주세요" })}
-            /></textboxs>
+              <span>{errors?.password?.message}</span>
+              <p>비밀번호 확인</p>
+
+              <input
+                {...register("password1", { required: "항목을 입력해주세요" })}
+                defaultValue="*******"
+              />
+            </textbox>
+
+            <textbox>
+              <span>{errors?.password1?.message}</span>
+              <p>생년월일</p>
+              <input
+                {...register("birthday", { required: "항목을 입력해주세요" })}
+              />
+            </textbox>
+            <textboxs>
+              <span>{errors?.birthday?.message}</span>
+              <p>전화번호</p>
+              <input
+                {...register("phoneNum", { required: "항목을 입력해주세요" })}
+              />
+            </textboxs>
             <span>{errors?.phoneNum?.message}</span>
             <div>
               <button onClick={onCancle}>취소</button>
@@ -101,7 +114,7 @@ const MyPageBox = styled.div`
   align-items: center;
 `;
 const Profile = styled.div`
-background-color: #8DBEB6;
+  background-color: #8dbeb6;
 `;
 const ProfileBox = styled.div`
   background-color: #303136;
@@ -124,15 +137,13 @@ const ProfileBox = styled.div`
   p {
     color: white;
     margin: 13px;
-    font-weight:bold;
-    text-align:center;
+    font-weight: bold;
+    text-align: center;
   }
   .profile {
     display: flex;
     justify-content: center;
     padding: 50px 0 30px 0;
- 
-
   }
   .info {
     display: flex;
@@ -161,8 +172,6 @@ const ProfileBox = styled.div`
     justify-content: center;
     flex-direction: column;
     align-items: center;
-
-
   }
 
   input {
@@ -171,36 +180,29 @@ const ProfileBox = styled.div`
     border-radius: 5px;
     width: 250px;
     text-align: center;
-    border-bottom:solid;
-    border-top:solid;
-    border-right:solid;
-    border-left:solid;
-    margin-left:100px;
-   
-
+    border-bottom: solid;
+    border-top: solid;
+    border-right: solid;
+    border-left: solid;
+    margin-left: 100px;
   }
   button:hover {
     background-color: gray;
     color: white;
   }
   textbox {
-    
     padding-bottom: 10px;
-    margin:2px;
-    width:100%;
-    border-top:2px solid #545454;
-
+    margin: 2px;
+    width: 100%;
+    border-top: 2px solid #545454;
   }
   textboxs {
-    
     padding-bottom: 10px;
-    margin:2px;
-    width:100%;
-    border-top:2px solid #545454;
-    border-bottom:2px solid #545454;
+    margin: 2px;
+    width: 100%;
+    border-top: 2px solid #545454;
+    border-bottom: 2px solid #545454;
   }
-
 `;
-
 
 export default EditInfo;

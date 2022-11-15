@@ -1,4 +1,5 @@
-import { Link } from "react-router-dom";
+import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
 const Container = styled.div``;
@@ -38,6 +39,12 @@ const List = styled.div`
 `;
 
 function Main() {
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (localStorage.getItem("token") == null) {
+      navigate("/");
+    }
+  }, []);
   return <Container></Container>;
 }
 

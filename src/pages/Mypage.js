@@ -23,7 +23,11 @@ function MyPage() {
 
   useEffect(() => {
     getData();
+    if (localStorage.getItem("token") == null) {
+      navigate("/");
+    }
   }, []);
+
   return (
     <Container>
       <MyPageBox>
@@ -33,7 +37,7 @@ function MyPage() {
           </div>
           <div className="info">
             <h3>{data.name}</h3>
-            <p>thyeonee@gmail.com</p>
+            <p>{data.email}</p>
           </div>
           <div className="button">
             <EditProfile onClick={onClick}>내 정보 수정</EditProfile>
