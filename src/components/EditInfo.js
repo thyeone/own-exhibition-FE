@@ -41,12 +41,12 @@ function EditInfo() {
     console.log(json);
   };
 
-  useEffect(() => {
-    getData();
-    if (localStorage.getItem("token") == null) {
-      navigate("/");
-    }
-  }, []);
+  // useEffect(() => {
+  //   getData();
+  //   if (localStorage.getItem("token") == null) {
+  //     navigate("/");
+  //   }
+  // }, []);
 
   return (
     <Container>
@@ -62,15 +62,15 @@ function EditInfo() {
             </div>
           </Profile>
           <form onSubmit={handleSubmit(onSubmit)}>
-            <textbox>
+            <Textbox>
               <p>비밀번호</p>
               <input
                 {...register("password", { required: "항목을 입력해주세요" })}
                 defaultValue="*******"
               />
-            </textbox>
+            </Textbox>
 
-            <textbox>
+            <Textbox>
               <span>{errors?.password?.message}</span>
               <p>비밀번호 확인</p>
 
@@ -78,24 +78,31 @@ function EditInfo() {
                 {...register("password1", { required: "항목을 입력해주세요" })}
                 defaultValue="*******"
               />
-            </textbox>
+            </Textbox>
 
-            <textbox>
+            <Textbox>
               <span>{errors?.password1?.message}</span>
               <p>생년월일</p>
               <input
                 {...register("birthday", { required: "항목을 입력해주세요" })}
               />
-            </textbox>
-            <textboxs>
-              <span>{errors?.birthday?.message}</span>
+            </Textbox>
+
+            <div className="message">
+              <p>{errors?.birthday?.message}</p>
+            </div>
+            <Textboxs>
               <p>전화번호</p>
               <input
                 {...register("phoneNum", { required: "항목을 입력해주세요" })}
               />
-            </textboxs>
-            <span>{errors?.phoneNum?.message}</span>
-            <div>
+
+              <div className="message">
+                <p>{errors?.phoneNum?.message}</p>
+              </div>
+            </Textboxs>
+
+            <div className="button">
               <button onClick={onCancle}>취소</button>
               <button>확인</button>
             </div>
@@ -114,14 +121,33 @@ const MyPageBox = styled.div`
   align-items: center;
 `;
 const Profile = styled.div`
-  background-color: #8dbeb6;
-`;
-const ProfileBox = styled.div`
   background-color: #303136;
-  border-radius: 10px;
+`;
+const Textbox = styled.div`
+  padding-bottom: 10px;
+
+  width: 100%;
+  border-top: 2px solid #545454;
+`;
+const Textboxs = styled.div`
+  padding-bottom: 10px;
+
+  width: 100%;
+  border-top: 2px solid #545454;
+  border-bottom: 2px solid #545454;
+`;
+
+const ProfileBox = styled.div`
+  background-color: white;
+  border-radius: 5px;
   width: 450px;
   height: 680px;
   margin-left: 20px;
+  border-top: solid;
+  border-bottom: solid;
+  border-left: solid;
+  border-right: solid;
+
   img {
     display: flex;
     width: 88px;
@@ -129,13 +155,13 @@ const ProfileBox = styled.div`
     cursor: pointer;
   }
   h3 {
-    color: white;
+    color: black;
     font-size: 20px;
     font-weight: bold;
   }
 
   p {
-    color: white;
+    color: black;
     margin: 13px;
     font-weight: bold;
     text-align: center;
@@ -151,8 +177,12 @@ const ProfileBox = styled.div`
     text-align: center;
     gap: 12px;
   }
+  .message p {
+    color: red;
+    font-size: 10px;
+  }
   button {
-    display: flex;
+    display: inline-block;
     justify-content: center;
     border-radius: 2px;
     cursor: pointer;
@@ -162,10 +192,11 @@ const ProfileBox = styled.div`
     border-radius: 5px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
     margin: 4px 2px;
     transition-duration: 0.4s;
     margin-top: 25px;
+
+    //margin-right: 100px;
   }
   form {
     display: flex;
@@ -190,18 +221,12 @@ const ProfileBox = styled.div`
     background-color: gray;
     color: white;
   }
-  textbox {
-    padding-bottom: 10px;
-    margin: 2px;
-    width: 100%;
-    border-top: 2px solid #545454;
+  .button {
+    position: absolute;
+    margin-top: 450px;
   }
-  textboxs {
-    padding-bottom: 10px;
-    margin: 2px;
-    width: 100%;
-    border-top: 2px solid #545454;
-    border-bottom: 2px solid #545454;
+
+  .button button {
   }
 `;
 
