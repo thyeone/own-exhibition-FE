@@ -1,13 +1,17 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useMatch, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo2 from "../assets/logo2.png";
 import Logout from "./shared/Logout";
 import mypage from "../assets/mypage_icon.png";
 
 function Header() {
-  const path = window.location.pathname;
+  const loginMatch = useMatch("/");
+  const registerMatch = useMatch("/register");
+  const findPwMatch = useMatch("/findpw");
   const navigate = useNavigate();
-  return path !== "/" ? (
+  return loginMatch !== null ||
+    registerMatch !== null ||
+    findPwMatch !== null ? null : (
     <StyledHeader>
       <Link to="/main">
         <StyledLogo>
@@ -22,7 +26,7 @@ function Header() {
         </Link>
       </HeaderRight>
     </StyledHeader>
-  ) : null;
+  );
 }
 
 const StyledHeader = styled.header`
