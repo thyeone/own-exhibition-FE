@@ -37,8 +37,8 @@ const List = styled.div`
   0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025); */
 `;
 
-function Home() {
+function Main() {
   return <Container></Container>;
 }
 
-export default Home;
+export default Main;

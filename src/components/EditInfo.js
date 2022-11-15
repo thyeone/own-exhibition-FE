@@ -1,60 +1,119 @@
-import { Link } from "react-router-dom";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import user from "../assets/user.png";
+
 function EditInfo() {
+  const [data, setData] = useState([]);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setError,
+  } = useForm();
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const onSubmit = (data) => {
+    if (data.password !== data.password1) {
+      setError(
+        "password1",
+        { message: "Password ard not the same." },
+        { shouldFocus: true }
+      );
+    }
+    setError("extraError", { message: "오류 발생" });
+  };
+  console.log(errors);
+  const onCancle = () => {
+    navigate("/mypage");
+  };
+
+  // const getData = async () => {
+  //   const json = await axios(`http://13.125.82.62/api/users/${id}`);
+  //   setData(json.data);
+  // };
+
+  // useEffect(() => {
+  //   getData();
+  // }, []);
+
   return (
     <Container>
-      <Editbox>
+      <MyPageBox>
         <ProfileBox>
-          <div className="myinfom">
-            <h4>프로필</h4>
-          </div>
+        <Profile>
           <div className="profile">
             <img src={user}></img>
-            <div className="info">
-              <h3>김태현</h3>
-              <p>thyeonee@gmail.com</p>
+          </div>
+          <div className="info">
+            <h3>이름</h3>
+            <p>thyeonee@gmail.com</p>
+          </div>
+          </Profile>
+          <form onSubmit={handleSubmit(onSubmit)}>
+         <textbox>
+            <p>비밀번호</p>
+            <input
+              {...register("password", { required: "항목을 입력해주세요" })}
+              defaultValue="*******"
+            /></textbox>
+         
+         <textbox>
+            <span>{errors?.password?.message}</span>
+            <p>비밀번호 확인</p>
+
+            <input
+              {...register("password1", { required: "항목을 입력해주세요" })}
+              defaultValue="*******"
+            /></textbox>
+
+            <textbox>
+            <span>{errors?.password1?.message}</span>
+            <p>생년월일</p>
+            <input
+              {...register("birthday", { required: "항목을 입력해주세요" })}
+            /></textbox>
+                <textboxs>
+            <span>{errors?.birthday?.message}</span>
+            <p>전화번호</p>
+            <input
+              {...register("phoneNum", { required: "항목을 입력해주세요" })}
+            /></textboxs>
+            <span>{errors?.phoneNum?.message}</span>
+            <div>
+              <button onClick={onCancle}>취소</button>
+              <button>확인</button>
             </div>
-          </div>
-          <div className="button">
-            <EditProfile>취소</EditProfile>
-            <Withdrawl>저장</Withdrawl>
-          </div>
+          </form>
         </ProfileBox>
-      </Editbox>
+      </MyPageBox>
     </Container>
   );
 }
-const EditProfile = styled.button`
-  border-radius: 5px;
-  width: 33%;
-  height: 40px;
-  background-color: #191919;
-  border: none;
-  color: white;
-  font-size: 14px;
-`;
 
-const Withdrawl = styled.button`
-  border-radius: 5px;
-  width: 33%;
-  height: 40px;
-  background-color: #191919;
-  border: none;
-  color: white;
-  font-size: 14px;
-  margin-left: 10px;
-`;
+const Container = styled.div``;
 
+const MyPageBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
+const Profile = styled.div`
+background-color: #8DBEB6;
+`;
 const ProfileBox = styled.div`
   background-color: #303136;
   border-radius: 10px;
-  width: 350px;
-  height: 400px;
+  width: 450px;
+  height: 680px;
+  margin-left: 20px;
   img {
     display: flex;
     width: 88px;
     height: 88px;
+    cursor: pointer;
   }
   h3 {
     color: white;
@@ -64,43 +123,84 @@ const ProfileBox = styled.div`
 
   p {
     color: white;
+    margin: 13px;
+    font-weight:bold;
+    text-align:center;
   }
   .profile {
     display: flex;
-    padding: 40px 0 30px 0;
+    justify-content: center;
+    padding: 50px 0 30px 0;
+ 
+
   }
   .info {
     display: flex;
     flex-direction: column;
     text-align: center;
-    margin-left: 20px;
-    margin-top: 10px;
-    gap: 14px;
+    gap: 12px;
   }
-  .button {
+  button {
     display: flex;
     justify-content: center;
-    padding-top: 20px;
-  }
-  .myinfom {
+    border-radius: 2px;
+    cursor: pointer;
+    background-color: #191919; /* Green */
     color: white;
-    font-size: 20px;
-    font-weight: bold;
-    margin-top: 15px;
+    width: 80px;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    margin: 4px 2px;
+    transition-duration: 0.4s;
+    margin-top: 25px;
   }
+  form {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+
+
+  }
+
+  input {
+    border: none;
+    padding-bottom: 8px;
+    border-radius: 5px;
+    width: 250px;
+    text-align: center;
+    border-bottom:solid;
+    border-top:solid;
+    border-right:solid;
+    border-left:solid;
+    margin-left:100px;
+   
+
+  }
+  button:hover {
+    background-color: gray;
+    color: white;
+  }
+  textbox {
+    
+    padding-bottom: 10px;
+    margin:2px;
+    width:100%;
+    border-top:2px solid #545454;
+
+  }
+  textboxs {
+    
+    padding-bottom: 10px;
+    margin:2px;
+    width:100%;
+    border-top:2px solid #545454;
+    border-bottom:2px solid #545454;
+  }
+
 `;
 
-const Container = styled.div``;
-
-const Editbox = styled.div`
-  background-color: #303136;
-  border-radius: 10px;
-  width: 500px;
-  height: 800px;
-  margin-left: 20px;
-  justify-content: center;
-  display: flex;
-  margin: auto;
-`;
 
 export default EditInfo;

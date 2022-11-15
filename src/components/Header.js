@@ -1,38 +1,35 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import logo from "../assets/logo.png";
 import logo2 from "../assets/logo2.png";
+import Logout from "./shared/Logout";
+import mypage from "../assets/mypage_icon.png";
 
 function Header() {
-  return (
+  const path = window.location.pathname;
+  const navigate = useNavigate();
+  return path !== "/" ? (
     <StyledHeader>
-      <Link to="/">
+      <Link to="/main">
         <StyledLogo>
           <img src={logo2} alt="logo"></img>
           <h3>너만의 전시회</h3>
         </StyledLogo>
       </Link>
       <HeaderRight>
-        <Link to="/Login">
-          <p>로그인</p>
-        </Link>
-        <Link to="/Register">
-          <p>회원가입</p>
-        </Link>
+        <button onClick={Logout}>로그아웃</button>
         <Link to="/Mypage">
-          <p>마이페이지</p>
+          <img src={mypage} alt="mypage" />
         </Link>
       </HeaderRight>
     </StyledHeader>
-  );
+  ) : null;
 }
+
 const StyledHeader = styled.header`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 32px;
-  padding-bottom: 22px;
-  background-color: white;
+  margin: 15px 0 33px;
 `;
 
 const StyledLogo = styled.div`
@@ -57,10 +54,21 @@ const HeaderRight = styled.div`
   display: flex;
   align-items: center;
   margin-right: 30px;
-  padding-top: 20px;
   p {
     margin-left: 10px;
     font-size: 14px;
+  }
+  button {
+    background-color: #303136;
+    color: white;
+    border: none;
+    border-radius: 7px;
+    padding: 10px;
+    margin-right: 24px;
+  }
+  img {
+    width: 28px;
+    height: 28px;
   }
 `;
 
