@@ -16,8 +16,6 @@ function Login() {
         password: data.password,
       })
       .then((res) => {
-        // console.log(res);
-        localStorage.setItem("id", res.data.id);
         localStorage.setItem("token", res.data.token);
         navigate("/main");
       })
@@ -49,7 +47,7 @@ function Login() {
             autoComplete="on"
             type="password"
             placeholder="비밀번호 입력"
-            minLength="6"
+            minLength="8"
           />
           <LoginBtn>로그인</LoginBtn>
         </Form>
