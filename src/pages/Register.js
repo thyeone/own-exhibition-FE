@@ -81,12 +81,15 @@ function Register() {
 
     axios
       .post("http://13.125.82.62/api/register", {
+        name: data.name,
         email: data.email,
         password: data.password,
+        password_confirmation: data.pwCheck,
+        birthday: data.birthday,
       })
       .then((response) => {
         console.log(response);
-        navigate("/login");
+        navigate("/");
       })
       .catch((err) => {
         console.log(err);
@@ -119,18 +122,18 @@ function Register() {
             autoComplete="on"
             type="password"
             placeholder="비밀번호 입력"
-            minLength="6"
+            minLength="8"
           />
           <Input
             {...register("pwCheck", {
               required: "항목을 입력해주세요",
               pattern: {
-                value: /^[A-Za-z0-9]{6,12}$/,
-                message: "6자리에서 12자리까지의 문자와 숫자를 사용해주세요.",
+                value: /^[A-Za-z0-9]{8,20}$/,
+                message: "8자리 이상의 문자와 숫자를 사용해주세요.",
               },
               minLength: {
-                value: 6,
-                message: "6자리 이상의 비밀번호를 입력해주세요.",
+                value: 8,
+                message: "8자리 이상의 비밀번호를 입력해주세요.",
               },
             })}
             autoComplete="on"
@@ -143,15 +146,15 @@ function Register() {
               required: "항목을 입력해주세요",
               pattern: {
                 value:
-                  /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/,
+                  /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/,
                 message: "올바른 날짜가 아닙니다.",
               },
             })}
             type="text"
-            placeholder="생년월일 입력 ex)19890101"
+            placeholder="생년월일 입력 ex)1989-01-01"
           />
           <span>{errors?.birthday?.message}</span>
-          <Input
+          {/* <Input
             {...register("phoneNum", {
               required: "항목을 입력해주세요",
               pattern: {
@@ -162,7 +165,7 @@ function Register() {
             type="text"
             placeholder="전화번호 입력 ex)010-1234-1234"
           />
-          <span>{errors?.phoneNum?.message}</span>
+          <span>{errors?.phoneNum?.message}</span> */}
           <Btn>가입하기</Btn>
         </Form>
       </RegisterBox>
