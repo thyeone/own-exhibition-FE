@@ -8,8 +8,25 @@ function MyPage() {
   const [data, setData] = useState([]);
   const accessToken = localStorage.getItem("token");
   const navigate = useNavigate();
-  const onClick = () => {
-    navigate("/mypage/editinfo");
+  const onEditInfo = () => {
+    navigate("/mypage/update");
+  };
+  const onSignOut = () => {
+    axios
+      .delete("http://13.125.82.62/api/delete/", {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((res) => {
+        console.log(res);
+        localStorage.clear();
+        navigate("/");
+      })
+      .catch((error) => {
+        alert("회원탈퇴 실패");
+        console.log("회원탈퇴 실패", error);
+      });
   };
   const getData = async () => {
     const json = await axios.get(`http://13.125.82.62/api/userinfo/`, {
@@ -40,8 +57,8 @@ function MyPage() {
             <p>{data.email}</p>
           </div>
           <div className="button">
-            <EditProfile onClick={onClick}>내 정보 수정</EditProfile>
-            <Withdrawl>회원 탈퇴</Withdrawl>
+            <EditProfile onClick={onEditInfo}>내 정보 수정</EditProfile>
+            <Withdrawl onClick={onSignOut}>회원 탈퇴</Withdrawl>
           </div>
         </ProfileBox>
         <WishlistBox>
@@ -61,10 +78,11 @@ const MyPageBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 120px;
 `;
 
 const ProfileBox = styled.div`
-  background-color: #303136;
+  background-color: #34353a;
   border-radius: 10px;
   width: 350px;
   height: 400px;
