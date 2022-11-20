@@ -80,7 +80,7 @@ const VisualBox = styled.section`
   h3 {
     padding-top: 227px;
     font-weight: bold;
-    font-size: 56px;
+    font-size: 52px;
     line-height: 70px;
     text-align: center;
     color: white;

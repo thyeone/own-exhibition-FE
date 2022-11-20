@@ -3,6 +3,7 @@ import { Link, useMatch, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import mypage from "../assets/mypage_icon.png";
 import Logout from "./shared/Logout";
+import { UserOutlined, ExportOutlined } from "@ant-design/icons";
 
 function Header() {
   const loginMatch = useMatch("/");
@@ -40,10 +41,11 @@ function Header() {
         </StyledLogo>
       </Link>
       <HeaderRight>
-        <button onClick={Logout}>로그아웃</button>
+        {/* <button onClick={Logout}>로그아웃</button> */}
         <Link to="/Mypage">
-          <img src={mypage} alt="mypage" />
+          <UserOutlined className="mypage" />
         </Link>
+        <ExportOutlined onClick={Logout} className="logout" />
       </HeaderRight>
     </StyledHeader>
   );
@@ -60,11 +62,6 @@ const StyledHeader = styled.header`
 const StyledLogo = styled.div`
   display: flex;
   margin-left: 50px;
-  /* padding-top: 20px; */
-  img {
-    width: 102px;
-    height: 102px;
-  }
   h3 {
     display: flex;
     margin-left: 12px;
@@ -78,24 +75,24 @@ const StyledLogo = styled.div`
 
 const HeaderRight = styled.div`
   display: flex;
-  align-items: center;
-  margin-right: 30px;
-  p {
-    margin-left: 10px;
-    font-size: 14px;
-  }
-  button {
-    background-color: #303136;
-    color: white;
-    border: none;
-    border-radius: 7px;
-    padding: 10px;
-    margin-right: 24px;
+  margin-right: 50px;
+  column-gap: 22px;
+
+  .mypage {
+    font-size: 24px;
     cursor: pointer;
+    color: #fff;
+    &:hover {
+      color: #bbbbbb;
+    }
   }
-  img {
-    width: 28px;
-    height: 28px;
+  .logout {
+    font-size: 24px;
+    cursor: pointer;
+    color: #fff;
+    &:hover {
+      color: #bbbbbb;
+    }
   }
 `;
 
