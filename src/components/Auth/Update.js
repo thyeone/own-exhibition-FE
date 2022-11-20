@@ -139,7 +139,6 @@ function Update() {
 }
 
 const Container = styled.div`
-  background-color: white;
   padding-bottom: 20px;
 `;
 

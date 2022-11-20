@@ -7,11 +7,13 @@ ${reset}
 
 * {
   box-sizing :border-box;
+  
 }
 
 body {
-  background-color: black;
   font-family: 'Noto Sans KR', sans-serif;
+  background-color: #18191E;
+  color:#fff;
 }
 
 a {

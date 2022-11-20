@@ -73,7 +73,6 @@ function MyPage() {
 }
 
 const Container = styled.div`
-  background-color: white;
   padding: 120px 0 160px 0;
 `;
 
