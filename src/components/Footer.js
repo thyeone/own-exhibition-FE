@@ -1,8 +1,14 @@
 import React from "react";
+import { useMatch } from "react-router-dom";
 import styled from "styled-components";
 
 const Footer = () => {
-  return (
+  const loginMatch = useMatch("/");
+  const registerMatch = useMatch("/register");
+  const findPwMatch = useMatch("/findpw");
+  return loginMatch !== null ||
+    registerMatch !== null ||
+    findPwMatch !== null ? null : (
     <StyledFooter>
       <div className="footer">
         <div>

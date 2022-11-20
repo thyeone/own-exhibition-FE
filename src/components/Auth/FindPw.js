@@ -54,7 +54,11 @@ function FindPw() {
   );
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  width: 100vw;
+  height: 100vw;
+  background-color: white;
+`;
 
 const RegisterBox = styled.div`
   position: absolute;
