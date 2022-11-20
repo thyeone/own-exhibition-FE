@@ -3,62 +3,6 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 
-const Container = styled.div``;
-
-const RegisterBox = styled.div`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  border-radius: 5px;
-  max-width: 550px;
-  background-color: white;
-  padding: 50px;
-  box-shadow: 0 10px 30px rgb(25 25 25 / 50%);
-`;
-
-const Title = styled.h1`
-  text-align: center;
-  color: #609ff1;
-  text-transform: uppercase;
-  font-weight: bolder;
-  letter-spacing: 1px;
-  font-size: 24px;
-  padding: 10px;
-  margin-bottom: 20px;
-`;
-
-const Form = styled.form`
-  span {
-    font-size: 12px;
-    padding-bottom: 30px;
-  }
-`;
-
-const Input = styled.input`
-  font-size: 14px;
-  padding: 10px;
-  margin-bottom: 10px;
-  /* border-radius: 5px; */
-  /* border: none;
-   */
-  background-color: rgba(25, 25, 25, 0.05);
-  border: 2px solid transparent;
-  width: 100%;
-  box-sizing: border-box;
-`;
-
-const Btn = styled.button`
-  font-size: 14px;
-  color: #fff;
-  padding: 10px;
-  margin-top: 10px;
-  border-radius: 5px;
-  background-color: #609ff1;
-  border: none;
-  width: 100%;
-`;
-
 function Register() {
   const {
     register,
@@ -172,5 +116,65 @@ function Register() {
     </Container>
   );
 }
+
+const Container = styled.div`
+  width: 100vw;
+  height: 100vw;
+  background-color: white;
+`;
+
+const RegisterBox = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  border-radius: 5px;
+  max-width: 550px;
+  background-color: white;
+  padding: 50px;
+  box-shadow: 0 10px 30px rgb(25 25 25 / 50%);
+`;
+
+const Title = styled.h1`
+  text-align: center;
+  color: #609ff1;
+  text-transform: uppercase;
+  font-weight: bolder;
+  letter-spacing: 1px;
+  font-size: 24px;
+  padding: 10px;
+  margin-bottom: 20px;
+`;
+
+const Form = styled.form`
+  span {
+    font-size: 12px;
+    padding-bottom: 30px;
+  }
+`;
+
+const Input = styled.input`
+  font-size: 14px;
+  padding: 10px;
+  margin-bottom: 10px;
+  /* border-radius: 5px; */
+  /* border: none;
+   */
+  background-color: rgba(25, 25, 25, 0.05);
+  border: 2px solid transparent;
+  width: 100%;
+  box-sizing: border-box;
+`;
+
+const Btn = styled.button`
+  font-size: 14px;
+  color: #fff;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  background-color: #609ff1;
+  border: none;
+  width: 100%;
+`;
 
 export default Register;

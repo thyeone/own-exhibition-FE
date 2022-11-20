@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import user from "../assets/user.png";
+import user from "../../assets/user.png";
 
 function Update() {
   const [data, setData] = useState([]);
@@ -138,7 +138,10 @@ function Update() {
   );
 }
 
-const Container = styled.div``;
+const Container = styled.div`
+  background-color: white;
+  padding-bottom: 20px;
+`;
 
 const MyPageBox = styled.div`
   display: flex;

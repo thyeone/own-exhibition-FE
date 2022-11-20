@@ -3,10 +3,11 @@ import Login from "./pages/Login";
 import MyPage from "./pages/Mypage";
 import GlobalStyle from "./GlobalStyle";
 import Register from "./pages/Register";
-import FindPw from "./components/FindPw";
+import FindPw from "./components/Auth/FindPw";
 import Header from "./components/Header";
 import Main from "./pages/Main";
-import Update from "./components/Update";
+import Update from "./components/Auth/Update";
+import Footer from "./components/Footer";
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path="/findPw" element={<FindPw />}></Route>
         <Route path="/mypage/update" element={<Update />}></Route>
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }

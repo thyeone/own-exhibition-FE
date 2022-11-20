@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import background from "../assets/background.jpg";
+import arrow from "../assets/arrow.svg";
 
 function Main() {
   const navigate = useNavigate();
@@ -14,42 +15,68 @@ function Main() {
   return (
     <Container>
       <VisualBox>
-        <img src={background} />
+        <img src={background} className="background" />
         <h3 className="visualText">
-          문구
+          전시회 고민하지 말고,
           <br />
           너만의 전시회
         </h3>
+        <img src={arrow} className="arrow" alt="scroll down" />
       </VisualBox>
     </Container>
   );
 }
 
-const Container = styled.div`
-  padding-top: 120px;
-`;
+const Container = styled.div``;
+
 const VisualBox = styled.section`
-  height: 772px;
+  height: 770px;
+  /* height: 772px; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  img {
+  background: rgba(0, 0, 0, 0.5);
+  background-blend-mode: darken;
+
+  .arrow {
+    margin-bottom: 41px;
+    animation: down 1.5s infinite;
+    opacity: 60%;
+  }
+  @keyframes down {
+    0% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translateY(15px);
+    }
+    40% {
+      transform: translate(0);
+    }
+  }
+
+  @-webkit-keyframes down {
+    0% {
+      transform: translate(0);
+    }
+    20% {
+      transform: translateY(15px);
+    }
+    40% {
+      transform: translate(0);
+    }
+  }
+
+  .background {
     position: absolute;
     width: 100vw;
-    height: 890px;
+    height: 770px;
     top: 0;
     z-index: -10;
     background-position: center;
-    background-size: cover;
-
-    /* position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    z-index: -2; */
   }
+
   h3 {
     padding-top: 227px;
     font-weight: bold;
@@ -58,33 +85,6 @@ const VisualBox = styled.section`
     text-align: center;
     color: white;
   }
-`;
-
-const Header = styled.div`
-  position: fixed;
-  top: 0;
-  margin-top: 40px;
-  padding-bottom: 30px;
-  width: 100%;
-  border-bottom: 1px solid #efefef;
-`;
-
-const Title = styled.h1`
-  font-size: 24px;
-  margin-left: 30px;
-`;
-
-const Btn = styled.button``;
-
-const RightHeader = styled.div`
-  float: right !important;
-  color: #666;
-  margin-right: 30px;
-`;
-
-const LoginTab = styled.span`
-  margin-left: 10px;
-  font-size: 15px;
 `;
 
 const List = styled.div`
