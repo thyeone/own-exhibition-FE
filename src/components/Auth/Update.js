@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import user from "../../assets/user.png";
+import user from "../../assets/img/user.png";
 
 function Update() {
   const [data, setData] = useState([]);
@@ -179,7 +179,6 @@ const ProfileBox = styled.div`
   p {
     color: white;
     margin: 13px;
-    font-weight: bold;
     text-align: center;
   }
   .profile {
@@ -232,7 +231,6 @@ const InputBox = styled.div`
   padding-bottom: 10px;
   margin: 2px;
   width: 100%;
-  border-top: 2px solid #545454;
 `;
 
 export default Update;
