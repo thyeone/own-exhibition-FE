@@ -2,7 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import user from "../assets/user.png";
+import user from "../assets/img/user.png";
 
 function MyPage() {
   const [data, setData] = useState([]);
@@ -50,7 +50,7 @@ function MyPage() {
       <MyPageBox>
         <ProfileBox>
           <div className="profile">
-            <img src={user}></img>
+            <img src={user} alt="profile"></img>
           </div>
           <div className="info">
             <h3>{data.name}</h3>
