@@ -1,10 +1,8 @@
-import axios from "axios";
 import { Link, useMatch, useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import mypage from "../assets/mypage_icon.png";
-import Logout from "./shared/Logout";
+import Logout from "./Auth/Logout";
 import { UserOutlined, ExportOutlined } from "@ant-design/icons";
-
+import { useState } from "react";
 function Header() {
   const loginMatch = useMatch("/");
   const registerMatch = useMatch("/register");
@@ -36,12 +34,10 @@ function Header() {
     <StyledHeader>
       <Link to="/main">
         <StyledLogo>
-          {/* <img src={logo2} alt="logo"></img> */}
           <h3>너만의 전시회</h3>
         </StyledLogo>
       </Link>
       <HeaderRight>
-        {/* <button onClick={Logout}>로그아웃</button> */}
         <Link to="/Mypage">
           <UserOutlined className="mypage" />
         </Link>
@@ -60,6 +56,7 @@ const StyledHeader = styled.header`
 `;
 
 const StyledLogo = styled.div`
+  @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap");
   display: flex;
   margin-left: 50px;
   h3 {
@@ -70,6 +67,7 @@ const StyledLogo = styled.div`
     font-weight: 600;
     text-align: center;
     color: white;
+    font-family: "IBM Plex Sans KR", sans-serif;
   }
 `;
 
