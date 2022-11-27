@@ -46,7 +46,7 @@ const Exhibition = styled.li`
 
 const Img = styled.img`
   display: block;
-  margin: 0 auto;
+  margin-bottom: 30px;
   padding: 0 20px;
   width: 100%;
   height: 270px;
