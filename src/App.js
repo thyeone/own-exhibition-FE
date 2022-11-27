@@ -8,7 +8,7 @@ import Header from "./components/Header";
 import Main from "./pages/Main";
 import Update from "./components/Auth/Update";
 import Footer from "./components/Footer";
-import Exhibiton from "./components/Exhibition";
+import Detail from "./components/Detail";
 
 function App() {
   return (
@@ -22,7 +22,7 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/findPw" element={<FindPw />}></Route>
         <Route path="/mypage/update" element={<Update />}></Route>
-        <Route path="/exhibition/:seq/*" element={<Exhibiton />}></Route>
+        <Route path="/exhibition/:seq/*" element={<Detail />}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>

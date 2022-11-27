@@ -1,9 +1,8 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Main from "../pages/Main";
 
-function Exhibiton() {
+function Detail() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const { seq } = useParams();
@@ -23,4 +22,4 @@ function Exhibiton() {
   return <h3>{data.title}</h3>;
 }
 
-export default Exhibiton;
+export default Detail;
