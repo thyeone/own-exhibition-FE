@@ -15,7 +15,7 @@ const Footer = () => {
           <p>이용약관</p>
           <p>개인정보처리방침</p>
         </div>
-        <p>Ⓒ2022 own-exhibition-team. All rights reserved.</p>
+        <p>Ⓒ2022 Team Culture-island. All rights reserved.</p>
       </div>
     </StyledFooter>
   );
