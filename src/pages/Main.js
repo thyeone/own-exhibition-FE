@@ -1,14 +1,21 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import background from "../assets/img/background.jpg";
 import arrow from "../assets/img/arrow.svg";
 import axios from "axios";
 import { Helmet } from "react-helmet";
+import Card from "../components/Card";
 
 function Main() {
   const [data, setData] = useState([]);
+  const [input, setInput] = useState("");
   const navigate = useNavigate();
+
+  const search = data.filter((item) =>
+    item.title.toLowerCase().includes(input.toLowerCase())
+  );
+
   const getData = async () => {
     const json = await axios("http://13.125.82.62/api/exhibition");
     setData(json.data.data);
@@ -40,25 +47,24 @@ function Main() {
           <Title>현재 전시</Title>
           <Search
             type="text"
-            placeholder="작품명 또는 작가명을 검색해주세요."
+            placeholder="작품명을 검색해주세요."
+            onChange={(event) => {
+              setInput(event.target.value.toLowerCase());
+            }}
           />
-          <SearchBtn type="button">검색</SearchBtn>
+          <SearchBtn type="submit">검색</SearchBtn>
         </div>
         <div className="borderSolid"></div>
-        <ExhibitionList>
-          {data?.slice(0, 8).map((data) => (
-            <Exhibition key={data.seq} title={data.title}>
-              <Link to={`/exhibition/${data.seq}`}>
-                <Img src={data.thumbnail} />
-                <p className="area">{data.area}</p>
-                <p className="title">{data.title}</p>
-                <p className="date">
-                  {data.startDate}~{data.endDate}
-                </p>
-              </Link>
-            </Exhibition>
+        <SearchItem>
+          {search.map((item) => (
+            <Card key={item.seq} {...item} />
           ))}
-        </ExhibitionList>
+        </SearchItem>
+        <CardList>
+          {data?.slice(0, 16).map((data) => (
+            <Card key={data.seq} {...data} />
+          ))}
+        </CardList>
       </Wrapper>
     </Container>
   );
@@ -138,7 +144,7 @@ const Wrapper = styled.div`
     padding-top: 15px;
     width: 95%;
     background-color: #fff;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid rgb(0, 0, 0, 0.2);
   }
 `;
 
@@ -157,7 +163,7 @@ const Search = styled.input`
   letter-spacing: -0.7px;
   background: #eee;
   margin: 20px 0 0 27px;
-  padding: 0 13px;
+  padding: 0 20px;
 `;
 
 const SearchBtn = styled.button`
@@ -179,54 +185,19 @@ const SearchBtn = styled.button`
   cursor: pointer;
 `;
 
-const ExhibitionList = styled.ul`
+const SearchItem = styled.ul`
   display: grid;
   grid-template-columns: repeat(4, minmax(300px, 1fr));
   grid-gap: 20px;
   padding: 50px;
+  list-style: none;
 `;
 
-const Exhibition = styled.li`
-  background-color: white;
-  margin-bottom: 100px;
-  padding: 30px;
-  border-radius: 5px;
-  color: inherit;
-  box-shadow: 0 13px 27px -5px rgba(50, 50, 93, 0.25),
-    0 8px 16px -8px rgba(0, 0, 0, 0.3), 0 -6px 16px -6px rgba(0, 0, 0, 0.025);
-  p {
-    margin-top: 15px;
-    color: #000;
-  }
-
-  .area {
-    font-weight: 550;
-  }
-
-  .title {
-    font-weight: bold;
-    font-size: 18px;
-  }
-
-  .date {
-    color: #777777;
-    font-weight: 500;
-    font-size: 15px;
-  }
-`;
-
-const Img = styled.img`
-  display: block;
-  margin: 0 auto;
-  padding: 0 20px;
-  width: 100%;
-  height: 270px;
-  border-bottom: 1px solid #000;
-  :hover {
-    transition: all 0.4s;
-    cursor: pointer;
-    transform: scale(1.1);
-  }
+const CardList = styled.ul`
+  display: grid;
+  grid-template-columns: repeat(4, minmax(300px, 1fr));
+  grid-gap: 20px;
+  padding: 50px;
 `;
 
 export default Main;
