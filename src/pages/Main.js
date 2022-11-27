@@ -55,13 +55,9 @@ function Main() {
           <SearchBtn type="submit">검색</SearchBtn>
         </div>
         <div className="borderSolid"></div>
-        <SearchItem>
-          {search.map((item) => (
-            <Card key={item.seq} {...item} />
-          ))}
-        </SearchItem>
+
         <CardList>
-          {data?.slice(0, 16).map((data) => (
+          {search?.slice(0, 16).map((data) => (
             <Card key={data.seq} {...data} />
           ))}
         </CardList>
@@ -183,14 +179,6 @@ const SearchBtn = styled.button`
   line-height: 46px;
   margin-left: 15px;
   cursor: pointer;
-`;
-
-const SearchItem = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(4, minmax(300px, 1fr));
-  grid-gap: 20px;
-  padding: 50px;
-  list-style: none;
 `;
 
 const CardList = styled.ul`
