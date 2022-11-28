@@ -8,6 +8,7 @@ import { Helmet } from "react-helmet";
 import Card from "../components/Card";
 
 function Main() {
+  const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const [input, setInput] = useState("");
   const navigate = useNavigate();
@@ -19,6 +20,7 @@ function Main() {
   const getData = async () => {
     const json = await axios(`http://13.125.82.62/api/exhibition`);
     setData(json.data.data);
+    setLoading(false);
     console.log(json);
   };
   useEffect(() => {
@@ -28,7 +30,26 @@ function Main() {
     }
   }, []);
 
-  return (
+  return loading ? (
+    <Container>
+      <Helmet>
+        <title>너만의 전시회</title>
+      </Helmet>
+      <VisualBox>
+        <img src={background} className="background" alt="background" />
+        <h3 className="visualText">
+          전시회 고민하지 말고,
+          <br />
+          '너만의 전시회'
+        </h3>
+        <img src={arrow} className="arrow" alt="scroll down" />
+      </VisualBox>
+
+      <LoadingPage>
+        <span>Loading ...</span>
+      </LoadingPage>
+    </Container>
+  ) : (
     <Container>
       <Helmet>
         <title>너만의 전시회</title>
@@ -55,7 +76,6 @@ function Main() {
           <SearchBtn type="submit">검색</SearchBtn>
         </div>
         <div className="borderSolid"></div>
-
         <CardList>
           {search?.slice(0, 16).map((data) => (
             <Card key={data.seq} {...data} />
@@ -66,11 +86,20 @@ function Main() {
   );
 }
 
+const LoadingPage = styled.div`
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 100;
+  color: ${(props) => props.theme.textColor};
+`;
+
 const Container = styled.div``;
 
 const VisualBox = styled.section`
   height: 770px;
-  /* height: 772px; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;

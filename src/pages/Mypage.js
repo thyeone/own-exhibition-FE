@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import user from "../assets/img/user.png";
@@ -47,6 +48,9 @@ function MyPage() {
 
   return (
     <Container>
+      <Helmet>
+        <title>마이페이지</title>
+      </Helmet>
       <MyPageBox>
         <ProfileBox>
           <div className="profile">
@@ -73,7 +77,7 @@ function MyPage() {
 }
 
 const Container = styled.div`
-  padding: 120px 0 160px 0;
+  padding: 126px 0 160px 0;
 `;
 
 const MyPageBox = styled.div`

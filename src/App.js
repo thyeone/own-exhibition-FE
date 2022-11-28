@@ -11,11 +11,13 @@ import Update from "./components/Auth/Update";
 import Footer from "./components/Footer";
 import Detail from "./components/Detail";
 import { theme } from "./theme";
+import ScrollToTop from "./components/Hooks/ScrollToTop";
 
 function App() {
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
+        <ScrollToTop />
         <GlobalStyle />
         <Header />
         <Routes>
