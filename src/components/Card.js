@@ -4,9 +4,9 @@ import styled from "styled-components";
 function Card(data) {
   return (
     <Exhibition>
-      <Link key={data.seq} to={`/exhibition/${data.seq}`}>
+      <Link key={data.id} to={`/exhibition/${data.id}`}>
         <Img src={data.thumbnail} />
-        <p className="area">{data.area.length === 0 ? "서울" : data.area}</p>
+        <p className="area">{data.area === null ? "서울" : data.area}</p>
         <p className="title">{data.title}</p>
         <p className="date">
           {data.startDate}~{data.endDate}

@@ -5,11 +5,11 @@ import { useNavigate, useParams } from "react-router-dom";
 function Detail() {
   const [data, setData] = useState([]);
   const navigate = useNavigate();
-  const { seq } = useParams();
+  const { id } = useParams();
 
   const getData = async () => {
-    const json = await axios(`http://13.125.82.62/api/exhibition/${seq}`);
-    setData(json);
+    const json = await axios(`http://13.125.82.62/api/exhibition/${id}`);
+    setData(json.data);
     console.log(json);
   };
   useEffect(() => {

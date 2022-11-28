@@ -22,7 +22,7 @@ function App() {
         <Route path="/register" element={<Register />}></Route>
         <Route path="/findPw" element={<FindPw />}></Route>
         <Route path="/mypage/update" element={<Update />}></Route>
-        <Route path="/exhibition/:seq/*" element={<Detail />}></Route>
+        <Route path="/exhibition/:id" element={<Detail />}></Route>
       </Routes>
       <Footer />
     </BrowserRouter>
