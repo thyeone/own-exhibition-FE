@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import styled from "styled-components";
 
 function Detail() {
   const [data, setData] = useState([]);
@@ -19,7 +20,25 @@ function Detail() {
     }
   }, []);
 
-  return <h3>{data.title}</h3>;
+  return (
+    <Wrapper>
+      <InfoBox>
+        <img src={data.thumbnail}></img>
+        <h3>{data.title}</h3>
+      </InfoBox>
+    </Wrapper>
+  );
 }
+
+const Wrapper = styled.div`
+  background: ${(props) => props.theme.bgColor};
+  padding: 150px;
+  h3 {
+  }
+`;
+
+const InfoBox = styled.div`
+  background-color: #fff;
+`;
 
 export default Detail;

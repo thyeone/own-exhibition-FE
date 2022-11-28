@@ -17,7 +17,7 @@ function Main() {
   );
 
   const getData = async () => {
-    const json = await axios("http://13.125.82.62/api/exhibition");
+    const json = await axios(`http://13.125.82.62/api/exhibition`);
     setData(json.data.data);
     console.log(json);
   };
@@ -38,7 +38,7 @@ function Main() {
         <h3 className="visualText">
           전시회 고민하지 말고,
           <br />
-          너만의 전시회
+          '너만의 전시회'
         </h3>
         <img src={arrow} className="arrow" alt="scroll down" />
       </VisualBox>
@@ -93,7 +93,7 @@ const VisualBox = styled.section`
     font-size: 52px;
     line-height: 70px;
     text-align: center;
-    color: white;
+    color: ${(props) => props.theme.bgColor};
   }
 
   .arrow {
@@ -127,8 +127,8 @@ const VisualBox = styled.section`
 `;
 
 const Wrapper = styled.div`
-  background-color: white;
-  color: #000;
+  background-color: ${(props) => props.theme.bgColor};
+  color: ${(props) => props.theme.textColor};
 
   .searchTab {
     padding: 10px;
@@ -139,7 +139,6 @@ const Wrapper = styled.div`
     margin: auto;
     padding-top: 15px;
     width: 95%;
-    background-color: #fff;
     border-bottom: 1px solid rgb(0, 0, 0, 0.2);
   }
 `;
