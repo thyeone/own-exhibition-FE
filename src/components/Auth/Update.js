@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { Helmet } from "react-helmet";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
@@ -63,6 +64,9 @@ function Update() {
 
   return (
     <Container>
+      <Helmet>
+        <title>내 정보 수정</title>
+      </Helmet>
       <MyPageBox>
         <ProfileBox>
           <Profile>
