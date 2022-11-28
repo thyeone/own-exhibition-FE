@@ -7,6 +7,8 @@ function Header() {
   const loginMatch = useMatch("/");
   const registerMatch = useMatch("/register");
   const findPwMatch = useMatch("/findpw");
+  const mainMatch = useMatch("/main");
+
   const navigate = useNavigate();
   const accessToken = localStorage.getItem("token");
 
@@ -33,11 +35,11 @@ function Header() {
     findPwMatch !== null ? null : (
     <StyledHeader>
       <Link to="/main">
-        <StyledLogo>
+        <StyledLogo isActive={mainMatch !== null}>
           <h3>너만의 전시회</h3>
         </StyledLogo>
       </Link>
-      <HeaderRight>
+      <HeaderRight isActive={mainMatch !== null}>
         <Link to="/Mypage">
           <UserOutlined className="mypage" />
         </Link>
@@ -52,7 +54,8 @@ const StyledHeader = styled.header`
   position: fixed;
   justify-content: space-between;
   width: 100%;
-  margin: 34px 0 33px;
+  margin-top: 34px;
+  margin-bottom: 33px;
 `;
 
 const StyledLogo = styled.div`
@@ -66,7 +69,8 @@ const StyledLogo = styled.div`
     font-size: 24px;
     font-weight: 600;
     text-align: center;
-    color: white;
+    color: ${(props) =>
+      props.isActive ? props.theme.bgColor : props.theme.textColor};
     font-family: "IBM Plex Sans KR", sans-serif;
   }
 `;
@@ -75,11 +79,13 @@ const HeaderRight = styled.div`
   display: flex;
   margin-right: 50px;
   column-gap: 22px;
+  color: ${(props) =>
+    props.isActive ? props.theme.bgColor : props.theme.textColor};
 
   .mypage {
     font-size: 24px;
     cursor: pointer;
-    color: #fff;
+
     &:hover {
       color: #bbbbbb;
     }
@@ -87,7 +93,6 @@ const HeaderRight = styled.div`
   .logout {
     font-size: 24px;
     cursor: pointer;
-    color: #fff;
     &:hover {
       color: #bbbbbb;
     }

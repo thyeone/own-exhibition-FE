@@ -1,4 +1,5 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { ThemeProvider } from "styled-components";
 import Login from "./pages/Login";
 import MyPage from "./pages/Mypage";
 import GlobalStyle from "./GlobalStyle";
@@ -9,23 +10,26 @@ import Main from "./pages/Main";
 import Update from "./components/Auth/Update";
 import Footer from "./components/Footer";
 import Detail from "./components/Detail";
+import { theme } from "./theme";
 
 function App() {
   return (
-    <BrowserRouter>
-      <GlobalStyle />
-      <Header />
-      <Routes>
-        <Route path="/" element={<Login />}></Route>
-        <Route path="/main" element={<Main />}></Route>
-        <Route path="/mypage" element={<MyPage />}></Route>
-        <Route path="/register" element={<Register />}></Route>
-        <Route path="/findPw" element={<FindPw />}></Route>
-        <Route path="/mypage/update" element={<Update />}></Route>
-        <Route path="/exhibition/:seq/*" element={<Detail />}></Route>
-      </Routes>
-      <Footer />
-    </BrowserRouter>
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <GlobalStyle />
+        <Header />
+        <Routes>
+          <Route path="/" element={<Login />}></Route>
+          <Route path="/main" element={<Main />}></Route>
+          <Route path="/mypage" element={<MyPage />}></Route>
+          <Route path="/register" element={<Register />}></Route>
+          <Route path="/findPw" element={<FindPw />}></Route>
+          <Route path="/mypage/update" element={<Update />}></Route>
+          <Route path="/exhibition/:id" element={<Detail />}></Route>
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </ThemeProvider>
   );
 }
 

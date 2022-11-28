@@ -4,9 +4,9 @@ import styled from "styled-components";
 function Card(data) {
   return (
     <Exhibition>
-      <Link key={data.seq} to={`/exhibition/${data.seq}`}>
+      <Link key={data.id} to={`/exhibition/${data.id}`}>
         <Img src={data.thumbnail} />
-        <p className="area">{data.area.length === 0 ? "서울" : data.area}</p>
+        <p className="area">{data.area === null ? "서울" : data.area}</p>
         <p className="title">{data.title}</p>
         <p className="date">
           {data.startDate}~{data.endDate}
@@ -26,7 +26,7 @@ const Exhibition = styled.li`
 
   p {
     margin-top: 15px;
-    color: #000;
+    color: ${(props) => props.theme.textColor};
   }
 
   .area {
@@ -46,7 +46,7 @@ const Exhibition = styled.li`
 
 const Img = styled.img`
   display: block;
-  margin: 0 auto;
+  margin-bottom: 30px;
   padding: 0 20px;
   width: 100%;
   height: 270px;
