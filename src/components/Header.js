@@ -51,7 +51,8 @@ function Header() {
 
 const StyledHeader = styled.header`
   display: flex;
-  position: fixed;
+  /* position: fixed; */
+  position: absolute;
   justify-content: space-between;
   width: 100%;
   margin-top: 34px;
