@@ -6,6 +6,7 @@ import arrow from "../assets/img/arrow.svg";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import Card from "../components/Card";
+import Categories from "../components/Categories";
 
 function Main() {
   const [loading, setLoading] = useState(true);
@@ -76,15 +77,7 @@ function Main() {
           <SearchBtn type="submit">검색</SearchBtn>
         </div>
         <div className="borderSolid"></div>
-        <Category>
-          <li className="allItems">전체</li>
-          <li className="exhibitionLists">전시</li>
-        </Category>
-        <CardList>
-          {search?.slice(0, 16).map((data) => (
-            <Card key={data.seq} {...data} />
-          ))}
-        </CardList>
+        <Categories data={data} />
       </Wrapper>
     </Container>
   );
@@ -211,46 +204,6 @@ const SearchBtn = styled.button`
   line-height: 46px;
   margin-left: 15px;
   cursor: pointer;
-`;
-
-const Category = styled.ul`
-  margin: 20px 0 0 25px;
-  .allItems {
-    display: inline-block;
-    position: relative;
-    vertical-align: middle;
-    min-width: 100px;
-    max-width: 100%;
-    height: 48px;
-    padding: 0 30px;
-    font-weight: 600;
-    background: #000;
-    color: #fff;
-    border: 1px solid #000;
-    border-radius: 24px;
-    text-align: center;
-    line-height: 46px;
-    margin-left: 15px;
-    cursor: pointer;
-  }
-  .exhibitionLists {
-    display: inline-block;
-    position: relative;
-    vertical-align: middle;
-    min-width: 100px;
-    max-width: 100%;
-    height: 48px;
-    padding: 0 30px;
-    font-weight: 600;
-    background: #fff;
-    color: #000;
-    border: 1px solid #000;
-    border-radius: 24px;
-    text-align: center;
-    line-height: 46px;
-    margin-left: 15px;
-    cursor: pointer;
-  }
 `;
 
 const CardList = styled.ul`
