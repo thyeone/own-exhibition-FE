@@ -5,18 +5,12 @@ import background from "../assets/img/background.jpg";
 import arrow from "../assets/img/arrow.svg";
 import axios from "axios";
 import { Helmet } from "react-helmet";
-import Card from "../components/Card";
-import Categories from "../components/Categories";
+import Exhibition from "../components/Exhibition";
 
 function Main() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
-  const [input, setInput] = useState("");
   const navigate = useNavigate();
-
-  const search = data.filter((item) =>
-    item.title.toLowerCase().includes(input.toLowerCase())
-  );
 
   const getData = async () => {
     const json = await axios(`http://13.125.82.62/api/exhibition`);
@@ -67,17 +61,8 @@ function Main() {
       <Wrapper>
         <div className="searchTab">
           <Title>현재 전시</Title>
-          <Search
-            type="text"
-            placeholder="작품명을 검색해주세요."
-            onChange={(event) => {
-              setInput(event.target.value.toLowerCase());
-            }}
-          />
-          <SearchBtn type="submit">검색</SearchBtn>
         </div>
-        <div className="borderSolid"></div>
-        <Categories data={data} />
+        <Exhibition data={data} />
       </Wrapper>
     </Container>
   );
@@ -173,44 +158,6 @@ const Title = styled.h3`
   font-size: 22px;
   font-weight: 600;
   padding: 50px 0 0 30px;
-`;
-
-const Search = styled.input`
-  width: 30%;
-  height: 48px;
-  border: none;
-  border-radius: 24px;
-  color: #949494;
-  letter-spacing: -0.7px;
-  background: #eee;
-  margin: 20px 0 0 27px;
-  padding: 0 20px;
-`;
-
-const SearchBtn = styled.button`
-  display: inline-block;
-  position: relative;
-  vertical-align: middle;
-  min-width: 100px;
-  max-width: 100%;
-  height: 48px;
-  padding: 0 30px;
-  font-weight: 600;
-  background: #000;
-  color: #fff;
-  border: 1px solid #000;
-  border-radius: 24px;
-  text-align: center;
-  line-height: 46px;
-  margin-left: 15px;
-  cursor: pointer;
-`;
-
-const CardList = styled.ul`
-  display: grid;
-  grid-template-columns: repeat(4, minmax(300px, 1fr));
-  grid-gap: 20px;
-  padding: 50px;
 `;
 
 export default Main;
