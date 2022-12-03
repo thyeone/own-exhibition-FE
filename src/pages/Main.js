@@ -6,6 +6,7 @@ import arrow from "../assets/img/arrow.svg";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import Card from "../components/Card";
+import Categories from "../components/Categories";
 
 function Main() {
   const [loading, setLoading] = useState(true);
@@ -76,11 +77,7 @@ function Main() {
           <SearchBtn type="submit">검색</SearchBtn>
         </div>
         <div className="borderSolid"></div>
-        <CardList>
-          {search?.slice(0, 16).map((data) => (
-            <Card key={data.seq} {...data} />
-          ))}
-        </CardList>
+        <Categories data={data} />
       </Wrapper>
     </Container>
   );
