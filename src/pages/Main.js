@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import background from "../assets/img/background.jpg";
@@ -6,24 +6,37 @@ import arrow from "../assets/img/arrow.svg";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import Exhibition from "../components/Exhibition";
+import Paging from "../components/Paging";
 
 function Main() {
   const [loading, setLoading] = useState(true);
+  const [page, setPage] = useState(1);
+  const [count, setCount] = useState([]);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
 
+  const handlePageChange = (page) => {
+    setPage(page);
+  };
+
   const getData = async () => {
-    const json = await axios(`http://13.125.82.62/api/exhibition`);
+    const json = await axios(`http://13.125.82.62/api/exhibition?page=${page}`);
     setData(json.data.data);
     setLoading(false);
-    console.log(json);
   };
+
+  const getCount = async () => {
+    const json = await axios(`http://13.125.82.62/api/exhibition`);
+    setCount(json.data);
+  };
+
   useEffect(() => {
     getData();
+    getCount();
     if (localStorage.getItem("token") == null) {
       navigate("/");
     }
-  }, []);
+  }, [page]);
 
   return loading ? (
     <Container>
@@ -39,7 +52,6 @@ function Main() {
         </h3>
         <img src={arrow} className="arrow" alt="scroll down" />
       </VisualBox>
-
       <LoadingPage>
         <span>Loading ...</span>
       </LoadingPage>
@@ -63,6 +75,13 @@ function Main() {
           <Title>현재 전시</Title>
         </div>
         <Exhibition data={data} />
+        <Paging
+          page={page}
+          setPage={setPage}
+          count={count}
+          data={data}
+          handlePageChange={handlePageChange}
+        />
       </Wrapper>
     </Container>
   );

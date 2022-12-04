@@ -16,7 +16,7 @@ function Exhibition({ data }) {
     activeCat === "전체"
       ? setDatas(data)
       : setDatas(data.filter((item) => item.realmName === activeCat));
-  }, [activeCat]);
+  }, [activeCat, data]);
 
   return (
     <Wrapper>
