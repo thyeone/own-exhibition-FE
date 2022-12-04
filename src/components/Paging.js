@@ -6,15 +6,17 @@ const Paging = ({ page, count, data, handlePageChange }) => {
   console.log(page, data);
 
   return (
-    <Pagination
-      activePage={page}
-      itemsCountPerPage={count.per_page}
-      totalItemsCount={count.total}
-      pageRangeDisplayed={5}
-      prevPageText={"‹"}
-      nextPageText={"›"}
-      onChange={handlePageChange}
-    />
+    <div className="pagination">
+      <Pagination
+        activePage={page}
+        itemsCountPerPage={count.per_page}
+        totalItemsCount={count.total}
+        pageRangeDisplayed={5}
+        prevPageText={"<"}
+        nextPageText={">"}
+        onChange={handlePageChange}
+      />
+    </div>
   );
 };
 

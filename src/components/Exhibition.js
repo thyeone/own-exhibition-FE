@@ -75,7 +75,7 @@ const CardList = styled.ul`
   display: grid;
   grid-template-columns: repeat(4, minmax(300px, 1fr));
   grid-gap: 20px;
-  padding: 50px;
+  padding: 50px 50px 0 59px;
 `;
 
 const ButtonWrapper = styled.div`
