@@ -143,7 +143,8 @@ function Update() {
 }
 
 const Container = styled.div`
-  padding-bottom: 20px;
+  /* padding-bottom: 50px; */
+  padding: 68px 0 57px 0;
 `;
 
 const MyPageBox = styled.div`

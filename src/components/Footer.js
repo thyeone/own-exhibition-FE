@@ -22,10 +22,9 @@ const Footer = () => {
 };
 
 const StyledFooter = styled.footer`
-  width: 100%;
+  /* width: 100%; */
   background: #111111;
   /* height: 100%; */
-  /* margin-top: 24px; */
   .footer {
     max-width: 1200px;
     width: 100%;
