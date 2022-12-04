@@ -77,13 +77,15 @@ function MyPage() {
 }
 
 const Container = styled.div`
-  padding: 126px 0 160px 0;
+  min-height: 864px;
+  padding: 126px 0 78px 0;
 `;
 
 const MyPageBox = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  padding-top: 80px;
 `;
 
 const ProfileBox = styled.div`

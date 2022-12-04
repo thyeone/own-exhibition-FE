@@ -15,7 +15,7 @@ ${reset}
 
 body {
   /* font-family: "Spoqa Han Sans Neo", "sans-serif"; */
-  font-family: 'Noto Sans KR', sans-serif;
+  /* font-family: 'Noto Sans KR', sans-serif; */
   background-color: ${(props) => props.theme.bgColor};
   color:${(props) => props.theme.textColor};
   
