@@ -5,12 +5,36 @@ import styled from "styled-components";
 import { Helmet } from "react-helmet";
 import { Link } from "react-scroll";
 import Map from "./Map";
+import hearton from "../assets/img/ic_heart_on.svg";
+import heartoff from "../assets/img/ic_heart.svg";
+import { heartAtom } from "../atom";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 function Detail() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
   const navigate = useNavigate();
   const { id } = useParams();
+  const accessToken = localStorage.getItem("token");
+  const isLike = useRecoilValue(heartAtom);
+  const setHeartAtom = useSetRecoilState(heartAtom);
+  const toggleHeart = () => setHeartAtom((prev) => !prev);
+
+  const LikeBtn = () => {
+    axios
+      .post(`http://13.125.82.62/api/toggle-wish/${id}`, accessToken, {
+        headers: {
+          Authorization: `Bearer ${accessToken}`,
+        },
+      })
+      .then((response) => {
+        console.log(response);
+        toggleHeart();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  };
 
   const getData = async () => {
     const json = await axios(`http://13.125.82.62/api/exhibition/${id}`);
@@ -39,7 +63,14 @@ function Detail() {
           <img src={data.thumbnail}></img>
         </ImgBox>
         <DescBox>
-          <h3 className="title">{data.title}</h3>
+          <h3 className="title">
+            {data.title}
+            <HeartBtn
+              src={isLike ? hearton : heartoff}
+              alt="like"
+              onClick={LikeBtn}
+            ></HeartBtn>
+          </h3>
           <div className="borderSolid"></div>
           <div className="desc">
             <p className="subTitle"> 카테고리 </p>
@@ -56,15 +87,13 @@ function Detail() {
             <Link to="1" spy={true} smooth={true}>
               <p className="place">{data.place}</p>
             </Link>
+            <span className="maptitle">지도</span>
+            <KakaoMap>
+              <Map data={data} />
+            </KakaoMap>
           </div>
         </DescBox>
       </DetailArea>
-      <BottomContents>
-        <span className="maptitle">지도</span>
-        <KakaoMap>
-          <Map data={data} />
-        </KakaoMap>
-      </BottomContents>
     </Wrapper>
   );
 }
@@ -82,18 +111,22 @@ const LoadingPage = styled.div`
 const Wrapper = styled.div``;
 
 const DetailArea = styled.div`
-  padding: 150px 150px 50px 150px;
+  padding: 150px 150px 250px 150px;
   display: flex;
   justify-content: center;
   align-items: center;
 `;
 
 const ImgBox = styled.div`
-  /* border: 1px solid #ececec; */
   img {
     width: 358px;
     height: 480px;
   }
+`;
+
+const HeartBtn = styled.img`
+  width: 30px;
+  cursor: pointer;
 `;
 
 const DescBox = styled.div`
@@ -132,19 +165,17 @@ const DescBox = styled.div`
     margin: 20px 0;
     border-bottom: 1px solid ${(props) => props.theme.borderColor};
   }
-`;
 
-const BottomContents = styled.div`
   .maptitle {
-    display: block;
+    display: flex;
     font-weight: 600;
-    text-align: center;
-    margin-bottom: 10px;
+    margin: 10px 0;
   }
 `;
+
 const KakaoMap = styled.div`
   display: flex;
-  justify-content: center;
+  /* justify-content: center; */
   padding-bottom: 40px;
 `;
 
