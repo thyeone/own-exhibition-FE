@@ -21,7 +21,6 @@ function App() {
   const setLightAtom = useSetRecoilState(isLightAtom);
   const toggleDark = () => setLightAtom((prev) => !prev);
   return (
-    // <ThemeProvider theme={theme}>
     <ThemeProvider theme={isLight ? lightTheme : darkTheme}>
       <Toggle onClick={toggleDark}>
         <ToggleIcon />
@@ -58,6 +57,9 @@ const Toggle = styled.button`
   background-color: #353638;
   width: 35px;
   height: 35px;
+  @media screen and (min-width: 1920px) {
+    margin: 0 15px 100px 0;
+  }
 `;
 
 const ToggleIcon = styled.img.attrs({

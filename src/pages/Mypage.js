@@ -103,8 +103,12 @@ function MyPage() {
 }
 
 const Container = styled.div`
-  min-height: 864px;
-  padding: 126px 0 78px 0;
+  @media screen and (max-width: 1800px) {
+    padding: 100px 0 78px 0;
+  }
+  @media screen and (max-width: 1920px) {
+    padding: 100px 0 130px 0;
+  }
 `;
 
 const MyPageBox = styled.div`
