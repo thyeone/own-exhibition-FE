@@ -2,14 +2,12 @@ import { Link, useMatch, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Logout from "./Auth/Logout";
 import { UserOutlined, ExportOutlined } from "@ant-design/icons";
-import { useState } from "react";
 function Header() {
   const loginMatch = useMatch("/");
   const registerMatch = useMatch("/register");
   const findPwMatch = useMatch("/findpw");
   const mainMatch = useMatch("/main");
 
-  const navigate = useNavigate();
   const accessToken = localStorage.getItem("token");
 
   // const onLogout = () => {
