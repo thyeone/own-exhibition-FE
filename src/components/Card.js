@@ -26,7 +26,7 @@ const Exhibition = styled.li`
 
   p {
     margin-top: 15px;
-    color: ${(props) => props.theme.textColor};
+    color: #000;
   }
 
   .area {

@@ -130,7 +130,7 @@ const DescBox = styled.div`
     display: block;
     width: 95%;
     margin: 20px 0;
-    border-bottom: 1px solid rgb(0, 0, 0, 0.2);
+    border-bottom: 1px solid ${(props) => props.theme.borderColor};
   }
 `;
 
