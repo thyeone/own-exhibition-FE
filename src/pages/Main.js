@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import background from "../assets/img/background.jpg";
@@ -123,7 +123,7 @@ const VisualBox = styled.section`
     font-size: 52px;
     line-height: 70px;
     text-align: center;
-    color: ${(props) => props.theme.bgColor};
+    color: #fff;
   }
 
   .arrow {
@@ -157,8 +157,8 @@ const VisualBox = styled.section`
 `;
 
 const Wrapper = styled.div`
-  background-color: ${(props) => props.theme.bgColor};
-  color: ${(props) => props.theme.textColor};
+  background-color: #fff;
+  color: #000;
 
   .searchTab {
     padding: 10px;
