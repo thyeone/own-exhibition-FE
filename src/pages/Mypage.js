@@ -4,14 +4,18 @@ import { Helmet } from "react-helmet";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import user from "../assets/img/user.png";
+import Wishlist from "../components/Wishlist";
+import { CaretLeftOutlined, CaretRightOutlined } from "@ant-design/icons";
 
 function MyPage() {
   const [data, setData] = useState([]);
+  const [wish, setWish] = useState([]);
   const accessToken = localStorage.getItem("token");
   const navigate = useNavigate();
   const onEditInfo = () => {
     navigate("/mypage/update");
   };
+
   const onSignOut = () => {
     axios
       .delete("http://13.125.82.62/api/delete/", {
@@ -29,18 +33,31 @@ function MyPage() {
         console.log("회원탈퇴 실패", error);
       });
   };
+
   const getData = async () => {
-    const json = await axios.get(`http://13.125.82.62/api/userinfo/`, {
+    const json = await axios(`http://13.125.82.62/api/userinfo/`, {
       headers: {
         Authorization: `Bearer ${accessToken}`,
       },
     });
     setData(json.data.user);
-    console.log(json);
+  };
+
+  const getWish = async () => {
+    const json = await axios(`http://13.125.82.62/api/userinfo/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    setWish(json.data.wish);
+    console.log(json.data.wish);
+    // console.log(json);
+    // console.log(data.user.email);
   };
 
   useEffect(() => {
     getData();
+    getWish();
     if (localStorage.getItem("token") == null) {
       navigate("/");
     }
@@ -68,8 +85,17 @@ function MyPage() {
         <WishlistBox>
           <WishlistHeader>
             <h3>찜한 전시(0)</h3>
-            <p>페이지</p>
+            <div className="rightSide">
+              <CaretLeftOutlined className="leftArrow" />
+              <span>1/1</span>
+              <CaretRightOutlined className="rightArrow" />
+            </div>
           </WishlistHeader>
+          <div>
+            {wish.map((wish, i) => (
+              <Wishlist key={i} id={wish.exhibition_id} />
+            ))}
+          </div>
         </WishlistBox>
       </MyPageBox>
     </Container>
@@ -84,7 +110,6 @@ const Container = styled.div`
 const MyPageBox = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
   padding-top: 80px;
 `;
 
@@ -159,7 +184,7 @@ const WishlistBox = styled.div`
   background-color: #303136;
   border-radius: 10px;
   width: 700px;
-  height: 400px;
+  height: auto;
   margin-left: 50px;
   padding: 32px;
 `;
@@ -176,10 +201,17 @@ const WishlistHeader = styled.div`
     font-size: 18px;
     font-weight: 600;
   }
-  p {
+  span {
     font-size: 12px;
     line-height: 18px;
     color: #cccccc;
+  }
+  .leftArrow {
+    font-size: 15px;
+  }
+
+  .rightArrow {
+    font-size: 15px;
   }
 `;
 

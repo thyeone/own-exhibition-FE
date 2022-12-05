@@ -30,6 +30,7 @@ function Register() {
         password: data.password,
         password_confirmation: data.pwCheck,
         birthday: data.birthday,
+        phone: data.phoneNum,
       })
       .then((response) => {
         console.log(response);
@@ -98,18 +99,18 @@ function Register() {
             placeholder="생년월일 입력 ex)1989-01-01"
           />
           <span>{errors?.birthday?.message}</span>
-          {/* <Input
+          <Input
             {...register("phoneNum", {
               required: "항목을 입력해주세요",
-              pattern: {
-                value: /^\d{3}-\d{3,4}-\d{4}$/,
-                message: "숫자, -을 포함해 휴대전화 형식에 맞게 입력해주세요.",
-              },
+              // pattern: {
+              //   value: /^\d{3}-\d{3,4}-\d{4}$/,
+              //   message: "숫자, -을 포함해 휴대전화 형식에 맞게 입력해주세요.",
+              // },
             })}
             type="text"
             placeholder="전화번호 입력 ex)010-1234-1234"
           />
-          <span>{errors?.phoneNum?.message}</span> */}
+          <span>{errors?.phoneNum?.message}</span>
           <Btn>가입하기</Btn>
         </Form>
       </RegisterBox>

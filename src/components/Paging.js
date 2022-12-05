@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import Pagination from "react-js-pagination";
 import Pagintion from "../components/styles/Pagination.css";
 

@@ -42,7 +42,7 @@ function Map({ data }) {
   return (
     <div
       id="map"
-      style={{ width: "500px", height: "350px", display: "block" }}
+      style={{ width: "400px", height: "350px", display: "block" }}
     ></div>
   );
 }

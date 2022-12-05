@@ -2,8 +2,6 @@ import { useState } from "react";
 import styled from "styled-components";
 
 function FindPw() {
-  const [loading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [birthdate, setBirthDate] = useState("");
