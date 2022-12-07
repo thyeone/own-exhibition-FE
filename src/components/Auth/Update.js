@@ -30,6 +30,7 @@ function Update() {
       .put(
         "http://13.125.82.62/api/change",
         {
+          old_password: data.oldPassword,
           password: data.password,
           birthday: data.birthday,
           phone: data.phoneNum,
@@ -88,6 +89,19 @@ function Update() {
           </Profile>
           <form onSubmit={handleSubmit(onSubmit)}>
             <InputBox>
+              <p>기존 비밀번호</p>
+              <input
+                {...register("oldPassword", {
+                  required: "항목을 입력해주세요",
+                  minLength: {
+                    value: 8,
+                    message: "8자리 이상의 비밀번호를 입력해주세요.",
+                  },
+                })}
+                type="text"
+                autoComplete="off"
+              />
+              <span>{errors?.password?.message}</span>
               <p>비밀번호</p>
               <input
                 {...register("password", {
@@ -177,8 +191,9 @@ const ProfileBox = styled.div`
   background-color: #303136;
   border-radius: 10px;
   width: 450px;
-  height: 700px;
+  height: auto;
   margin-left: 20px;
+  padding-bottom: 20px;
   img {
     display: flex;
     width: 88px;
@@ -250,8 +265,6 @@ const ProfileBox = styled.div`
   }
 `;
 const InputBox = styled.div`
-  padding-bottom: 10px;
-  margin: 2px;
   width: 100%;
 `;
 
