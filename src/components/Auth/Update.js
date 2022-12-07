@@ -31,6 +31,7 @@ function Update() {
         password: data.password,
         password_confirmation: data.pwCheck,
         birthday: data.birthday,
+        phone: data.phoneNum,
       })
       .then((response) => {
         console.log(response);
@@ -130,6 +131,14 @@ function Update() {
                 })}
               />
               <span>{errors?.birthday?.message}</span>
+              <p>전화번호</p>
+              <input
+                {...register("phoneNum", {
+                  required: "항목을 입력해주세요",
+                })}
+                type="text"
+              />
+              <span>{errors?.phoneNum?.message}</span>
             </InputBox>
             <div>
               <button onClick={onCancle}>취소</button>
@@ -160,7 +169,7 @@ const ProfileBox = styled.div`
   background-color: #303136;
   border-radius: 10px;
   width: 450px;
-  height: 620px;
+  height: 700px;
   margin-left: 20px;
   img {
     display: flex;
