@@ -52,6 +52,7 @@ const Wrapper = styled.div`
   }
 
   .title {
+    font-weight: 600;
   }
   .date {
     color: #999999;
@@ -63,6 +64,7 @@ const Wrapper = styled.div`
   .place {
     line-height: 30px;
     display: block;
+    font-weight: 600;
   }
 `;
 
