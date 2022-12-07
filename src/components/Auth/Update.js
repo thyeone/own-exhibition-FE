@@ -27,15 +27,22 @@ function Update() {
     setError("extraError", { message: "오류 발생" });
 
     axios
-      .put("http://13.125.82.62/api/userinfo", {
-        password: data.password,
-        password_confirmation: data.pwCheck,
-        birthday: data.birthday,
-        phone: data.phoneNum,
-      })
+      .put(
+        "http://13.125.82.62/api/change",
+        {
+          password: data.password,
+          birthday: data.birthday,
+          phone: data.phoneNum,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
       .then((response) => {
         console.log(response);
-        navigate("/");
+        navigate("/mypage");
       })
       .catch((err) => {
         console.log(err);
@@ -94,7 +101,8 @@ function Update() {
                     message: "8자리 이상의 비밀번호를 입력해주세요.",
                   },
                 })}
-                type="password"
+                defaultValue={data.password}
+                type="text"
                 autoComplete="off"
               />
               <span>{errors?.password?.message}</span>
@@ -113,7 +121,8 @@ function Update() {
                     message: "8자리 이상의 비밀번호를 입력해주세요.",
                   },
                 })}
-                type="password"
+                defaultValue={data.password_confirmation}
+                type="text"
                 autoComplete="off"
               />
               <span>{errors?.pwCheck?.message}</span>
@@ -122,21 +131,20 @@ function Update() {
               <p>생년월일</p>
               <input
                 {...register("birthday", {
-                  required: "항목을 입력해주세요",
                   pattern: {
                     value:
                       /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/,
                     message: "올바른 날짜가 아닙니다.",
                   },
                 })}
+                defaultValue={data.birthday}
               />
               <span>{errors?.birthday?.message}</span>
               <p>전화번호</p>
               <input
-                {...register("phoneNum", {
-                  required: "항목을 입력해주세요",
-                })}
+                {...register("phoneNum")}
                 type="text"
+                defaultValue={data.phone}
               />
               <span>{errors?.phoneNum?.message}</span>
             </InputBox>
