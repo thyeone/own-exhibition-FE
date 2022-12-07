@@ -9,8 +9,3 @@ export const lightTheme = {
   textColor: "#000",
   borderColor: "#9e9e9e",
 };
-
-// export const theme = {
-//   bgColor: "#fff",
-//   textColor: "#000",
-// };

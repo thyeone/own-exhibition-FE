@@ -107,6 +107,9 @@ const VisualBox = styled.section`
   align-items: center;
   background: rgba(0, 0, 0, 0.5);
   background-blend-mode: darken;
+  @media screen and (min-width: 1920px) {
+    height: 970px;
+  }
 
   .background {
     position: absolute;
@@ -115,6 +118,9 @@ const VisualBox = styled.section`
     top: 0;
     z-index: -10;
     background-position: center;
+    @media screen and (min-width: 1920px) {
+      height: 970px;
+    }
   }
 
   h3 {

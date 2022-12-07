@@ -27,14 +27,23 @@ function Update() {
     setError("extraError", { message: "오류 발생" });
 
     axios
-      .put("http://13.125.82.62/api/userinfo", {
-        password: data.password,
-        password_confirmation: data.pwCheck,
-        birthday: data.birthday,
-      })
+      .put(
+        "http://13.125.82.62/api/change",
+        {
+          old_password: data.oldPassword,
+          password: data.password,
+          birthday: data.birthday,
+          phone: data.phoneNum,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      )
       .then((response) => {
         console.log(response);
-        navigate("/");
+        navigate("/mypage");
       })
       .catch((err) => {
         console.log(err);
@@ -80,6 +89,19 @@ function Update() {
           </Profile>
           <form onSubmit={handleSubmit(onSubmit)}>
             <InputBox>
+              <p>기존 비밀번호</p>
+              <input
+                {...register("oldPassword", {
+                  required: "항목을 입력해주세요",
+                  minLength: {
+                    value: 8,
+                    message: "8자리 이상의 비밀번호를 입력해주세요.",
+                  },
+                })}
+                type="text"
+                autoComplete="off"
+              />
+              <span>{errors?.password?.message}</span>
               <p>비밀번호</p>
               <input
                 {...register("password", {
@@ -93,7 +115,8 @@ function Update() {
                     message: "8자리 이상의 비밀번호를 입력해주세요.",
                   },
                 })}
-                type="password"
+                defaultValue={data.password}
+                type="text"
                 autoComplete="off"
               />
               <span>{errors?.password?.message}</span>
@@ -112,7 +135,8 @@ function Update() {
                     message: "8자리 이상의 비밀번호를 입력해주세요.",
                   },
                 })}
-                type="password"
+                defaultValue={data.password_confirmation}
+                type="text"
                 autoComplete="off"
               />
               <span>{errors?.pwCheck?.message}</span>
@@ -121,15 +145,22 @@ function Update() {
               <p>생년월일</p>
               <input
                 {...register("birthday", {
-                  required: "항목을 입력해주세요",
                   pattern: {
                     value:
                       /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/,
                     message: "올바른 날짜가 아닙니다.",
                   },
                 })}
+                defaultValue={data.birthday}
               />
               <span>{errors?.birthday?.message}</span>
+              <p>전화번호</p>
+              <input
+                {...register("phoneNum")}
+                type="text"
+                defaultValue={data.phone}
+              />
+              <span>{errors?.phoneNum?.message}</span>
             </InputBox>
             <div>
               <button onClick={onCancle}>취소</button>
@@ -160,8 +191,9 @@ const ProfileBox = styled.div`
   background-color: #303136;
   border-radius: 10px;
   width: 450px;
-  height: 620px;
+  height: auto;
   margin-left: 20px;
+  padding-bottom: 20px;
   img {
     display: flex;
     width: 88px;
@@ -233,8 +265,6 @@ const ProfileBox = styled.div`
   }
 `;
 const InputBox = styled.div`
-  padding-bottom: 10px;
-  margin: 2px;
   width: 100%;
 `;
 

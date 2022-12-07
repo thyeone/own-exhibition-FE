@@ -69,7 +69,7 @@ function Detail() {
               src={isLike ? hearton : heartoff}
               alt="like"
               onClick={LikeBtn}
-            ></HeartBtn>
+            />
           </h3>
           <div className="borderSolid"></div>
           <div className="desc">
@@ -126,6 +126,7 @@ const ImgBox = styled.div`
 
 const HeartBtn = styled.img`
   width: 30px;
+  margin-right: 30px;
   cursor: pointer;
 `;
 
@@ -143,6 +144,8 @@ const DescBox = styled.div`
   .desc {
   }
   .title {
+    display: flex;
+    justify-content: space-between;
     font-size: 32px;
     font-weight: 600;
     font-family: "Spoqa Han Sans Neo", "sans-serif";
