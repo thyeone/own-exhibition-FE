@@ -6,7 +6,7 @@ import arrow from "../assets/img/arrow.svg";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import Exhibition from "../components/Exhibition";
-import Paging from "../components/Paging";
+import Paging from "../components/Hooks/Paging";
 
 function Main() {
   const [loading, setLoading] = useState(true);
