@@ -77,7 +77,6 @@ function Main() {
         <Exhibition data={data} />
         <Paging
           page={page}
-          setPage={setPage}
           count={count}
           data={data}
           handlePageChange={handlePageChange}
