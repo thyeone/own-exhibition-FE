@@ -19,6 +19,10 @@ function Detail() {
   const isLike = useRecoilValue(heartAtom);
   const setHeartAtom = useSetRecoilState(heartAtom);
   const toggleHeart = () => setHeartAtom((prev) => !prev);
+  const today = Date.now();
+  const endDate = new Date(data.endDate);
+  const getTime = endDate.getTime();
+  const endImminent = getTime - today;
 
   const LikeBtn = () => {
     axios
@@ -75,9 +79,12 @@ function Detail() {
           <div className="desc">
             <p className="subTitle"> 카테고리 </p>
             <p className="content">{data.realmName}</p>
-            <p className="subTitle">기간</p>
+            <p className="date">기간</p>
             <p className="content">
               {data.startDate}~{data.endDate}
+            </p>
+            <p className="endImminent">
+              {endImminent <= 1209600 ? "(종료 임박)" : "여유"}
             </p>
             <p className="subTitle">지역</p>
             <p className="content">{data.area === null ? "-" : data.area}</p>
@@ -153,6 +160,15 @@ const DescBox = styled.div`
   .subTitle {
     font-size: 16px;
     font-weight: 600;
+  }
+  .date {
+    font-size: 16px;
+    font-weight: 600;
+  }
+  .endImminent {
+    color: red;
+    font-weight: 600;
+    font-size: 12px;
   }
   .content {
     font-family: "Nanum Gothic", sans-serif;

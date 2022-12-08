@@ -2,6 +2,13 @@ import { Link } from "react-router-dom";
 import styled from "styled-components";
 
 function Card(data) {
+  // 날짜 밀리세컨드 변환
+  // endImminent <= 12096000000 : 14일 이내
+  const today = Date.now();
+  const endDate = new Date(data.endDate);
+  const getTime = endDate.getTime();
+  const endImminent = getTime - today;
+
   return (
     <Exhibition>
       <Link key={data.id} to={`/exhibition/${data.id}`}>
@@ -10,6 +17,9 @@ function Card(data) {
         <p className="title">{data.title}</p>
         <p className="date">
           {data.startDate}~{data.endDate}
+        </p>
+        <p className="endImminent">
+          {endImminent <= 1209600000 ? "종료 임박" : null}
         </p>
       </Link>
     </Exhibition>
@@ -41,6 +51,9 @@ const Exhibition = styled.li`
     color: #777777;
     font-weight: 500;
     font-size: 15px;
+  }
+  .endImminent {
+    color: red;
   }
 `;
 
