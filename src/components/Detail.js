@@ -84,7 +84,7 @@ function Detail() {
               {data.startDate}~{data.endDate}
             </p>
             <p className="endImminent">
-              {endImminent <= 1209600 ? "(종료 임박)" : "여유"}
+              {endImminent <= 1209600000 ? "(종료 임박)" : "여유"}
             </p>
             <p className="subTitle">지역</p>
             <p className="content">{data.area === null ? "-" : data.area}</p>
