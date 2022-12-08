@@ -102,7 +102,7 @@ function Update() {
                 autoComplete="off"
               />
               <span>{errors?.password?.message}</span>
-              <p>비밀번호</p>
+              <p>새 비밀번호</p>
               <input
                 {...register("password", {
                   required: "항목을 입력해주세요",
@@ -145,6 +145,7 @@ function Update() {
               <p>생년월일</p>
               <input
                 {...register("birthday", {
+                  required: "항목을 입력해주세요.",
                   pattern: {
                     value:
                       /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/,
@@ -156,7 +157,9 @@ function Update() {
               <span>{errors?.birthday?.message}</span>
               <p>전화번호</p>
               <input
-                {...register("phoneNum")}
+                {...register("phoneNum", {
+                  required: "항목을 입력해주세요.",
+                })}
                 type="text"
                 defaultValue={data.phone}
               />

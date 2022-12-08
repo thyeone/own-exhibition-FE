@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import Card from "./Card";
-import CatBtn from "./CatBtn";
+import CatBtn from "./Hooks/CatBtn";
 
 function Exhibition({ data }) {
   const [activeCat, setActiveCat] = useState("전체");

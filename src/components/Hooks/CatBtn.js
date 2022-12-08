@@ -1,4 +1,4 @@
-import styles from "./styles/CatBtn.css";
+import styles from "../styles/CatBtn.css";
 
 export default function Catbtn({ name, catActive, handleSetCat }) {
   return (
