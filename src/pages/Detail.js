@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 import { Link } from "react-scroll";
-import Map from "./Map";
+import Map from "../components/Map";
 import hearton from "../assets/img/ic_heart_on.svg";
 import heartoff from "../assets/img/ic_heart.svg";
 import { heartAtom } from "../atom";
@@ -84,7 +84,7 @@ function Detail() {
               {data.startDate}~{data.endDate}
             </p>
             <p className="endImminent">
-              {endImminent <= 1209600000 ? "(종료 임박)" : "여유"}
+              {endImminent <= 1209600000 ? "(종료 임박)" : null}
             </p>
             <p className="subTitle">지역</p>
             <p className="content">{data.area === null ? "-" : data.area}</p>
