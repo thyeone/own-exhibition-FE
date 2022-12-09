@@ -2,11 +2,17 @@ import { Link, useMatch, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import Logout from "./Auth/Logout";
 import { UserOutlined, ExportOutlined } from "@ant-design/icons";
+import LogoBlack from "../assets/img/logo_black.png";
+import LogoWhite from "../assets/img/logo_white.png";
+import { useRecoilValue } from "recoil";
+import { isLightAtom } from "../atom";
+
 function Header() {
   const loginMatch = useMatch("/");
   const registerMatch = useMatch("/register");
   const findPwMatch = useMatch("/findpw");
   const mainMatch = useMatch("/main");
+  const isLight = useRecoilValue(isLightAtom);
 
   const accessToken = localStorage.getItem("token");
 
@@ -34,7 +40,9 @@ function Header() {
     <StyledHeader>
       <Link to="/main">
         <StyledLogo isActive={mainMatch !== null}>
-          <h3>너만의 전시회</h3>
+          <HeaderLogo
+            src={isLight !== true || mainMatch ? LogoWhite : LogoBlack}
+          />
         </StyledLogo>
       </Link>
       <HeaderRight isActive={mainMatch !== null}>
@@ -56,21 +64,18 @@ const StyledHeader = styled.header`
   margin-bottom: 33px;
 `;
 
+const HeaderLogo = styled.img`
+  display: flex;
+  width: 110px;
+  margin-left: 12px;
+  align-items: center;
+  text-align: center;
+`;
+
 const StyledLogo = styled.div`
   @import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+KR&display=swap");
   display: flex;
   margin-left: 50px;
-  h3 {
-    display: flex;
-    margin-left: 12px;
-    align-items: center;
-    font-size: 24px;
-    font-weight: 600;
-    text-align: center;
-    color: ${(props) =>
-      props.isActive ? props.theme.bgColor : props.theme.textColor};
-    font-family: "IBM Plex Sans KR", sans-serif;
-  }
 `;
 
 const HeaderRight = styled.div`
