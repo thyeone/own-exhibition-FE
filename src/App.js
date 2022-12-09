@@ -9,7 +9,7 @@ import Header from "./components/Header";
 import Main from "./pages/Main";
 import Update from "./components/Auth/Update";
 import Footer from "./components/Footer";
-import Detail from "./components/Detail";
+import Detail from "./pages/Detail";
 import { darkTheme, lightTheme } from "./theme";
 import ScrollToTop from "./components/Hooks/ScrollToTop";
 import icon from "./assets/img/darkmode.png";
