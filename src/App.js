@@ -2,12 +2,13 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import styled, { ThemeProvider } from "styled-components";
 import Login from "./pages/Login";
 import MyPage from "./pages/Mypage";
+import UpdateInfo from "./components/Auth/UpdateInfo";
+import UpdatePw from "./components/Auth/UpdatePw";
 import GlobalStyle from "./GlobalStyle";
 import Register from "./pages/Register";
 import FindPw from "./components/Auth/FindPw";
 import Header from "./components/Header";
 import Main from "./pages/Main";
-import Update from "./components/Auth/Update";
 import Footer from "./components/Footer";
 import Detail from "./pages/Detail";
 import { darkTheme, lightTheme } from "./theme";
@@ -35,7 +36,8 @@ function App() {
           <Route path="/mypage" element={<MyPage />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/findPw" element={<FindPw />}></Route>
-          <Route path="/mypage/update" element={<Update />}></Route>
+          <Route path="/mypage/updateinfo" element={<UpdateInfo />}></Route>
+          <Route path="/mypage/updatepw" element={<UpdatePw />}></Route>
           <Route path="/exhibition/:id" element={<Detail />}></Route>
         </Routes>
         <Footer />
