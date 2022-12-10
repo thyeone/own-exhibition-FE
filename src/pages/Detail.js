@@ -4,21 +4,20 @@ import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import { Helmet } from "react-helmet";
 import { Link } from "react-scroll";
-import Map from "./Map";
-import hearton from "../assets/img/ic_heart_on.svg";
-import heartoff from "../assets/img/ic_heart.svg";
-import { heartAtom } from "../atom";
-import { useRecoilValue, useSetRecoilState } from "recoil";
+import Map from "../components/Map";
+import HeartButton from "../components/HeartButton";
 
 function Detail() {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState([]);
+  const [wish, setWish] = useState([]);
+  const [like, setLike] = useState(false);
+
   const navigate = useNavigate();
   const { id } = useParams();
   const accessToken = localStorage.getItem("token");
-  const isLike = useRecoilValue(heartAtom);
-  const setHeartAtom = useSetRecoilState(heartAtom);
-  const toggleHeart = () => setHeartAtom((prev) => !prev);
+
+  // 날짜 함수
   const today = Date.now();
   const endDate = new Date(data.endDate);
   const getTime = endDate.getTime();
@@ -33,7 +32,7 @@ function Detail() {
       })
       .then((response) => {
         console.log(response);
-        toggleHeart();
+        setLike(!like);
       })
       .catch((error) => {
         console.log(error);
@@ -44,10 +43,20 @@ function Detail() {
     const json = await axios(`http://13.125.82.62/api/exhibition/${id}`);
     setData(json.data);
     setLoading(false);
-    console.log(json);
   };
+
+  const getWish = async () => {
+    const json = await axios(`http://13.125.82.62/api/userinfo/`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+    setWish(json.data.wish);
+  };
+
   useEffect(() => {
     getData();
+    getWish();
     if (localStorage.getItem("token") == null) {
       navigate("/");
     }
@@ -69,10 +78,12 @@ function Detail() {
         <DescBox>
           <h3 className="title">
             {data.title}
-            <HeartBtn
-              src={isLike ? hearton : heartoff}
-              alt="like"
-              onClick={LikeBtn}
+            <HeartButton
+              data={data}
+              like={like}
+              setLike={setLike}
+              LikeBtn={LikeBtn}
+              wish={wish}
             />
           </h3>
           <div className="borderSolid"></div>
@@ -84,7 +95,7 @@ function Detail() {
               {data.startDate}~{data.endDate}
             </p>
             <p className="endImminent">
-              {endImminent <= 1209600000 ? "(종료 임박)" : "여유"}
+              {endImminent <= 1209600000 ? "(종료 임박)" : null}
             </p>
             <p className="subTitle">지역</p>
             <p className="content">{data.area === null ? "-" : data.area}</p>
@@ -129,12 +140,6 @@ const ImgBox = styled.div`
     width: 358px;
     height: 480px;
   }
-`;
-
-const HeartBtn = styled.img`
-  width: 30px;
-  margin-right: 30px;
-  cursor: pointer;
 `;
 
 const DescBox = styled.div`
@@ -194,7 +199,6 @@ const DescBox = styled.div`
 
 const KakaoMap = styled.div`
   display: flex;
-  /* justify-content: center; */
   padding-bottom: 40px;
 `;
 

@@ -115,7 +115,7 @@ function Register() {
               // },
             })}
             type="text"
-            placeholder="전화번호 입력 ex)010-1234-1234"
+            placeholder="전화번호 입력 ex)01012341234"
           />
           <span>{errors?.phoneNum?.message}</span>
           <Btn>가입하기</Btn>

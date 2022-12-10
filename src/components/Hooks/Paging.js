@@ -2,8 +2,6 @@ import Pagination from "react-js-pagination";
 import Pagintion from "../styles/Pagination.css";
 
 const Paging = ({ page, count, data, handlePageChange }) => {
-  console.log(page, data);
-
   return (
     <div className="pagination">
       <Pagination

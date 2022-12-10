@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import user from "../../assets/img/user.png";
 
-function Update() {
+function UpdatePw() {
   const [data, setData] = useState([]);
   const accessToken = localStorage.getItem("token");
   const navigate = useNavigate();
@@ -17,23 +17,21 @@ function Update() {
     setError,
   } = useForm();
   const onSubmit = (data) => {
-    if (data.password !== data.password1) {
+    if (data.password !== data.pwCheck) {
       setError(
-        "password1",
+        "pwCheck",
         { message: "Passwords are not the same." },
         { shouldFocus: true }
       );
     }
-    setError("extraError", { message: "오류 발생" });
-
+    setError("extraError", { message: "비밀번호를 올바르게 입력해주세요." });
     axios
-      .put(
-        "http://13.125.82.62/api/change",
+      .post(
+        "http://13.125.82.62/api/changepassword",
         {
           old_password: data.oldPassword,
           password: data.password,
-          birthday: data.birthday,
-          phone: data.phoneNum,
+          confirm_password: data.pwCheck,
         },
         {
           headers: {
@@ -141,30 +139,6 @@ function Update() {
               />
               <span>{errors?.pwCheck?.message}</span>
             </InputBox>
-            <InputBox>
-              <p>생년월일</p>
-              <input
-                {...register("birthday", {
-                  required: "항목을 입력해주세요.",
-                  pattern: {
-                    value:
-                      /^(19[0-9][0-9]|20\d{2})-(0[0-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[0-1])$/,
-                    message: "올바른 날짜가 아닙니다.",
-                  },
-                })}
-                defaultValue={data.birthday}
-              />
-              <span>{errors?.birthday?.message}</span>
-              <p>전화번호</p>
-              <input
-                {...register("phoneNum", {
-                  required: "항목을 입력해주세요.",
-                })}
-                type="text"
-                defaultValue={data.phone}
-              />
-              <span>{errors?.phoneNum?.message}</span>
-            </InputBox>
             <div>
               <button onClick={onCancle}>취소</button>
               <button>확인</button>
@@ -271,4 +245,4 @@ const InputBox = styled.div`
   width: 100%;
 `;
 
-export default Update;
+export default UpdatePw;

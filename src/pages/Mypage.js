@@ -12,26 +12,11 @@ function MyPage() {
   const [wish, setWish] = useState([]);
   const accessToken = localStorage.getItem("token");
   const navigate = useNavigate();
-  const onEditInfo = () => {
-    navigate("/mypage/update");
+  const EditInfo = () => {
+    navigate("/mypage/updateinfo");
   };
-
-  const onSignOut = () => {
-    axios
-      .delete("http://13.125.82.62/api/delete/", {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      })
-      .then((res) => {
-        console.log(res);
-        localStorage.clear();
-        navigate("/");
-      })
-      .catch((error) => {
-        alert("회원탈퇴 실패");
-        console.log("회원탈퇴 실패", error);
-      });
+  const ChangePw = () => {
+    navigate("/mypage/updatepw");
   };
 
   const getData = async () => {
@@ -50,9 +35,6 @@ function MyPage() {
       },
     });
     setWish(json.data.wish);
-    console.log(json.data.wish);
-    // console.log(json);
-    // console.log(data.user.email);
   };
 
   useEffect(() => {
@@ -78,13 +60,13 @@ function MyPage() {
             <p>{data.email}</p>
           </div>
           <div className="button">
-            <EditProfile onClick={onEditInfo}>내 정보 수정</EditProfile>
-            <Withdrawl onClick={onSignOut}>회원 탈퇴</Withdrawl>
+            <EditProfile onClick={EditInfo}>내 정보 수정</EditProfile>
+            <EditPassword onClick={ChangePw}>비밀번호 변경</EditPassword>
           </div>
         </ProfileBox>
         <WishlistBox>
           <WishlistHeader>
-            <h3>찜한 전시(0)</h3>
+            <h3>찜한 전시({wish.length})</h3>
             <div className="rightSide">
               <CaretLeftOutlined className="leftArrow" />
               <span>1/1</span>
@@ -158,6 +140,12 @@ const ProfileBox = styled.div`
     justify-content: center;
     padding-top: 20px;
   }
+
+  .changepassword {
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+  }
 `;
 
 const EditProfile = styled.button`
@@ -171,12 +159,11 @@ const EditProfile = styled.button`
   cursor: pointer;
 `;
 
-const Withdrawl = styled.button`
+const EditPassword = styled.button`
   border-radius: 5px;
   width: 33%;
   height: 40px;
   background-color: #58a6ff;
-
   border: none;
   color: white;
   font-size: 14px;
