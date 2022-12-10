@@ -35,9 +35,6 @@ function MyPage() {
       },
     });
     setWish(json.data.wish);
-    console.log(json.data.wish);
-    // console.log(json);
-    // console.log(data.user.email);
   };
 
   useEffect(() => {
@@ -69,7 +66,7 @@ function MyPage() {
         </ProfileBox>
         <WishlistBox>
           <WishlistHeader>
-            <h3>찜한 전시(0)</h3>
+            <h3>찜한 전시({wish.length})</h3>
             <div className="rightSide">
               <CaretLeftOutlined className="leftArrow" />
               <span>1/1</span>
