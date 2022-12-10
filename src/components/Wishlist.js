@@ -8,7 +8,6 @@ const Wishlist = ({ id }) => {
   const getData = async () => {
     const json = await axios(`http://13.125.82.62/api/exhibition/${id}`);
     setData(json.data);
-    console.log(json.data);
   };
 
   useEffect(() => {
