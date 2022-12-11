@@ -1,9 +1,9 @@
-import { Link, useMatch, useNavigate } from "react-router-dom";
+import { Link, useMatch } from "react-router-dom";
 import styled from "styled-components";
 import Logout from "./Auth/Logout";
 import { UserOutlined, ExportOutlined } from "@ant-design/icons";
-import LogoBlack from "../assets/img/logo_black.png";
-import LogoWhite from "../assets/img/logo_white.png";
+import LogoBlack from "../assets/img/logo_black.svg";
+import LogoWhite from "../assets/img/logo_white.svg";
 import { useRecoilValue } from "recoil";
 import { isLightAtom } from "../atom";
 
