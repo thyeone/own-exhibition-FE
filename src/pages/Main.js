@@ -5,6 +5,7 @@ import background from "../assets/img/background.jpg";
 import arrow from "../assets/img/arrow.svg";
 import axios from "axios";
 import { Helmet } from "react-helmet";
+import { Link } from "react-scroll";
 import Exhibition from "../components/Exhibition";
 import Paging from "../components/Hooks/Paging";
 
@@ -68,6 +69,17 @@ function Main() {
           <br />
           '너만의 전시회'
         </h3>
+        <div className="button-wrapper">
+          <Link
+            to="scroll-bottom"
+            spy={true}
+            smooth={true}
+            delay={100}
+            isDynamic={true}
+          >
+            <div className="part1-button">전시 보러가기</div>
+          </Link>
+        </div>
         <img src={arrow} className="arrow" alt="scroll down" />
       </VisualBox>
       <Wrapper>
@@ -110,6 +122,27 @@ const VisualBox = styled.section`
     height: 970px;
   }
 
+  .button-wrapper {
+    position: absolute;
+    left: 50%;
+    bottom: 25%;
+    transform: translate(-50%, 25%);
+    white-space: nowrap;
+  }
+  .part1-button {
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    padding: 10px 100px;
+    border: 1px solid #fff;
+    color: #fff;
+    background-color: rgb(0, 0, 0, 0.1);
+    cursor: pointer;
+    &:hover {
+      background-color: rgb(255, 255, 255, 0.2);
+      transition: all 0.5s ease;
+    }
+  }
   .background {
     position: absolute;
     width: 100vw;

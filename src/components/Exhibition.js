@@ -51,8 +51,7 @@ function Exhibition({ data }) {
           handleSetCat={setActiveCat}
         />
       </ButtonWrapper>
-
-      <CardList>
+      <CardList id="scroll-bottom">
         {search.map((data, i) => (
           <Card key={i} {...data} />
         ))}

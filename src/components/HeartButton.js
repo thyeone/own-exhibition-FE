@@ -4,10 +4,10 @@ import styled from "styled-components";
 import { useEffect } from "react";
 
 const HeartButton = ({ data, like, setLike, LikeBtn, wish }) => {
-  const arr = wish.map((like) => like.exhibition_id);
+  const likeArray = wish.map((like) => like.exhibition_id);
 
   const heartState = () => {
-    arr.includes(data.id) ? setLike(true) : setLike(false);
+    likeArray.includes(data.id) ? setLike(true) : setLike(false);
   };
 
   useEffect(() => {
