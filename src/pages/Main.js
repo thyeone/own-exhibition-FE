@@ -136,8 +136,8 @@ const VisualBox = styled.section`
     padding: 10px 100px;
     border: 1px solid #fff;
     color: #fff;
+    background-color: rgb(0, 0, 0, 0.1);
     cursor: pointer;
-    background-color: transparent;
     &:hover {
       background-color: rgb(255, 255, 255, 0.2);
       transition: all 0.5s ease;
