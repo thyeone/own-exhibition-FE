@@ -65,9 +65,9 @@ function Main() {
       <VisualBox>
         <img src={background} className="background" alt="background" />
         <h3 className="visualText">
-          전시회 고민하지 말고,
+          전시회, 어디 갈지 고민이라면
           <br />
-          '너만의 전시회'
+          '너만의 전시회'를 찾아봐!
         </h3>
         <div className="button-wrapper">
           <Link
@@ -84,7 +84,7 @@ function Main() {
       </VisualBox>
       <Wrapper>
         <div className="searchTab">
-          <Title>현재 전시</Title>
+          <Title id="scroll-bottom">현재 전시</Title>
         </div>
         <Exhibition data={data} />
         <Paging
