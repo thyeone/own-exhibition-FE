@@ -7,7 +7,7 @@ import axios from "axios";
 import { Helmet } from "react-helmet";
 import { Link } from "react-scroll";
 import Exhibition from "../components/Exhibition";
-import Paging from "../components/Hooks/Paging";
+import Paging from "../Hooks/Paging";
 
 function Main() {
   const [loading, setLoading] = useState(true);
