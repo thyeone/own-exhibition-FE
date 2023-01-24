@@ -12,7 +12,7 @@ import Main from "./pages/Main";
 import Footer from "./components/Footer";
 import Detail from "./pages/Detail";
 import { darkTheme, lightTheme } from "./styles/theme";
-import ScrollToTop from "./Hooks/ScrollToTop";
+import ScrollToTop from "./hooks/ScrollToTop";
 import icon from "./assets/img/darkmode.png";
 import { useRecoilValue, useSetRecoilState } from "recoil";
 import { isLightAtom } from "./atoms/heartAtom";
